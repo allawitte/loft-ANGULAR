@@ -16,11 +16,11 @@
 */
 	angular.module('Loft',[
 					'ngRoute',
-					'UsersCtrl',
-					'UserCtrl'
+					'Loft.Users',
+					'Loft.User'
 					])
 					.config(Config)
-					.controller('MainCtrl', mainController)
+					.controller('MainCtrl', mainController);
 
 	function mainController($scope){
 		$scope.hello = "Hello, world!";
@@ -33,7 +33,7 @@
 			controller : 'UsersCtrl',
 			controllerAs : 'usc'
 		})
-		.when('/user/:id',{
+		.when('/user',{
 			templateUrl : 'app/user/user.html',
 			controller : 'UserCtrl',
 			controllerAs : 'uc'

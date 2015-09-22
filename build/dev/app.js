@@ -15,8 +15,12 @@
 		}]);
 */
 	angular.module('Loft',[
-					'ngRoute'
-					]).controller('MainCtrl', mainController);
+					'ngRoute',
+					'Loft.Users',
+					'Loft.User'
+					])
+					.config(Config)
+					.controller('MainCtrl', mainController);
 
 	function mainController($scope){
 		$scope.hello = "Hello, world!";
@@ -27,15 +31,26 @@
 		.when('/users',{
 			templateUrl : 'app/users/users.html',
 			controller : 'UsersCtrl',
-			controllerAs : 'uc'
+			controllerAs : 'usc'
 		})
-		.when('/user/:id',{
+		.when('/user',{
 			templateUrl : 'app/user/user.html',
 			controller : 'UserCtrl',
 			controllerAs : 'uc'
 		})
 		.otherwise({redirectTo : '/'})
 	}
+})();
+;(function(){
+	'use strict';
+	angular.module('Loft.User',[
+		]).
+	controller('UserCtrl',userController);
+
+	function userController(){
+		
+	}
+
 })();
 ;(function(){
 	'use strict';
