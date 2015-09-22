@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="Loft">
+<head>
+	<meta charset="UTF-8">
+	<title>ngLoftblog application</title>
+	<link rel="stylesheet" href="theme.css">
+	<link rel="stylesheet" href="app.css">
+</head>
+<body>
+	<div class="container" ng-controller="MainCtrl">
+		<ng-include	src="'app/status/navbar.html'"></ng-include>
+		<div class="container view-container" ng-view></div>
+		
+	</div>
+	<script src="libs.js"></script>
+	<script src="app.js"></script>
+</body>
+</html>
