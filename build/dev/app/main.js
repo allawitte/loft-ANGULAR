@@ -15,8 +15,12 @@
 		}]);
 */
 	angular.module('Loft',[
-					'ngRoute'
-					]).controller('MainCtrl', mainController);
+					'ngRoute',
+					'UsersCtrl',
+					'UserCtrl'
+					])
+					.config(Config)
+					.controller('MainCtrl', mainController)
 
 	function mainController($scope){
 		$scope.hello = "Hello, world!";
@@ -27,7 +31,7 @@
 		.when('/users',{
 			templateUrl : 'app/users/users.html',
 			controller : 'UsersCtrl',
-			controllerAs : 'uc'
+			controllerAs : 'usc'
 		})
 		.when('/user/:id',{
 			templateUrl : 'app/user/user.html',
