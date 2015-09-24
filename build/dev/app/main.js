@@ -13,7 +13,8 @@
 	angular.module('Loft').controller('NameCtrl',[$scope, function($scope){
 	
 		}]);
-*/
+		*/
+
 	angular.module('Loft',[
 					'ngRoute',
 					'Loft.Users',
@@ -24,20 +25,11 @@
 
 	function mainController($scope){
 		$scope.hello = "Hello, world!";
+
 	}
 
 	function Config($routeProvider){
-		$routeProvider
-		.when('/users',{
-			templateUrl : 'app/users/users.html',
-			controller : 'UsersCtrl',
-			controllerAs : 'usc'
-		})
-		.when('/user',{
-			templateUrl : 'app/user/user.html',
-			controller : 'UserCtrl',
-			controllerAs : 'uc'
-		})
+		$routeProvider		
 		.otherwise({redirectTo : '/'})
 	}
 })();

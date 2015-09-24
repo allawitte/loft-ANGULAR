@@ -17,15 +17,18 @@ gulp.task('js', function(){
 		.pipe(concat('libs.js'))
 		.pipe(gulp.dest('build/dev'));
 
-	gulp.src('build/dev/app/**/*.js')
-		.pipe(concat('app.js'))
-		.pipe(gulp.dest('build/dev'));
+	
 
 	gulp.src('build/dev/app/**/*.scss')
 		.pipe(scss())
 		.pipe(concat('app.css'))
 		//autoprefix
 		//minification
+		.pipe(gulp.dest('build/dev'));
+});
+gulp.task('app', function(){
+	gulp.src('build/dev/app/**/*.js')
+		.pipe(concat('app.js'))
 		.pipe(gulp.dest('build/dev'));
 });
 
@@ -49,13 +52,15 @@ gulp.task('webserver', function(){
 });
 
 gulp.task('watch',function(){
-	gulp.src('build/dev/app/**/*.js', ['js']);
-	gulp.src('build/dev/app/**/*.scss', ['css']);
+	gulp.watch('build/dev/app/**/*.js', ['js']);
+	gulp.watch('build/dev/app/**/*.scss', ['css']);
+	gulp.watch('build/dev/app/**/*.*', ['app']);
 })
 
 gulp.task('default', [
 	'js',
 	'css',
-	'watch',
-	'webserver'
+	'app',
+	'webserver',
+	'watch'
 	]);

@@ -4,8 +4,13 @@
 		]).
 	controller('UserCtrl',userController);
 
-	function userController(){
-		
+	function userController($routeProvider){
+		$routeProvider
+		.when('/user',{
+			templateUrl : 'app/user/user.html',
+			controller : 'UserCtrl',
+			controllerAs : 'uc'
+		});
 	}
 
 })();

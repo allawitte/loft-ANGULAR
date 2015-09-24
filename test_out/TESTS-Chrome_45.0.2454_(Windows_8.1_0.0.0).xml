@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<testsuite name="Chrome 45.0.2454 (Windows 8.1 0.0.0)" package="" timestamp="2015-09-24T16:11:41" id="0" hostname="Alla" tests="0" errors="1" failures="0" time="0">
+  <properties>
+    <property name="browser.fullName" value="Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.99 Safari/537.36"/>
+  </properties>
+  <system-out>
+    <![CDATA[
+]]>
+  </system-out>
+  <system-err/>
+</testsuite>
