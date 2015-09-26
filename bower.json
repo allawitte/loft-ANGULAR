@@ -21,6 +21,7 @@
     "angular": "~1.4.6",
     "angular-bootstrap": "~0.13.4",
     "angular-route": "~1.4.6",
+    "angular-ui-router": "ui-route#~0.2.15",
     "bootstrap": "~3.3.5"
   },
   "devDependencies": {

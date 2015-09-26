@@ -16,20 +16,30 @@
 		*/
 
 	angular.module('Loft',[
-					'ngRoute',
+					//'ngRoute',
+					'ui.router',
 					'Loft.Users',
-					'Loft.User'
+					'Loft.User',
+					'Loft.Home'
 					])
 					.config(Config)
 					.controller('MainCtrl', mainController);
 
-	function mainController($scope){
-		$scope.hello = "Hello, world!";
+mainController.$inject = ['$scope'];
+	function mainController(){
+		
 
 	}
-
+/*
 	function Config($routeProvider){
 		$routeProvider		
 		.otherwise({redirectTo : '/'})
 	}
+*/
+
+function Config($urlRouterProvider){
+		$urlRouterProvider		
+		.otherwise('/')
+	}
+
 })();

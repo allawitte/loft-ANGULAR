@@ -1,9 +1,11 @@
 ;(function(){
 	'use strict';
 	angular.module('Loft.User',[
-		]).
-	controller('UserCtrl',userController);
-
+		'ui.router'
+		])
+	.config(UserConfig)
+	.controller('UserCtrl',userController);
+	/*
 	function userController($routeProvider){
 		$routeProvider
 		.when('/user',{
@@ -11,6 +13,22 @@
 			controller : 'UserCtrl',
 			controllerAs : 'uc'
 		});
+	}
+	 */
+
+	 function UserConfig($stateProvider){
+	 	$stateProvider
+		.state('user',{
+			url: '/user',
+			templateUrl : 'app/user/user.html',
+			controller : 'UserCtrl',
+			controllerAs : 'uc'
+		});
+
+	 }
+	 userController.$inject = ['$scope'];
+	function userController(){
+		
 	}
 
 })();
