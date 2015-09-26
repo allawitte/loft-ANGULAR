@@ -26,7 +26,7 @@
 					.controller('MainCtrl', mainController);
 
 mainController.$inject = ['$scope'];
-	function mainController(){
+	function mainController($scope){
 		
 
 	}
@@ -53,7 +53,7 @@ function Config($urlRouterProvider){
 		.controller('HomeCtrl',homeController);
 	
  homeController.$inject = ['$scope'];
-	function homeController(){
+	function homeController($scope){
 		
 	}
 /*
@@ -75,41 +75,6 @@ function HomeConfig($stateProvider){
 			templateUrl : 'app/home/home.html',
 			controller : 'HomeCtrl',
 			controllerAs : 'home'
-		});
-	}
-})();
-
-;(function(){
-	'use strict';
-	angular.module('Loft.Users',[
-		//'ngRoute'
-		'ui.router'
-		])
-		.config(UsersConfig)
-		.controller('UsersCtrl',usersController);
-	
- usersController.$inject = ['$scope'];
-	function usersController(){
-		
-	}
-/*
-	function UsersConfig($routeProvider){
-		$routeProvider
-		.when('/users',{
-			templateUrl : 'app/users/users.html',
-			controller : 'UsersCtrl',
-			controllerAs : 'usc'
-		});
-	}
-
-*/
-function UsersConfig($stateProvider){
-		$stateProvider
-		.state('users',{
-			url: '/users',
-			templateUrl : 'app/users/users.html',
-			controller : 'UsersCtrl',
-			controllerAs : 'usc'
 		});
 	}
 })();
@@ -143,8 +108,42 @@ function UsersConfig($stateProvider){
 
 	 }
 	 userController.$inject = ['$scope'];
-	function userController(){
+	function userController($scope){
 		
 	}
 
+})();
+;(function(){
+	'use strict';
+	angular.module('Loft.Users',[
+		//'ngRoute'
+		'ui.router'
+		])
+		.config(UsersConfig)
+		.controller('UsersCtrl',usersController);
+	
+ usersController.$inject = ['$scope'];
+	function usersController($scope){
+		
+	}
+/*
+	function UsersConfig($routeProvider){
+		$routeProvider
+		.when('/users',{
+			templateUrl : 'app/users/users.html',
+			controller : 'UsersCtrl',
+			controllerAs : 'usc'
+		});
+	}
+
+*/
+function UsersConfig($stateProvider){
+		$stateProvider
+		.state('users',{
+			url: '/users',
+			templateUrl : 'app/users/users.html',
+			controller : 'UsersCtrl',
+			controllerAs : 'usc'
+		});
+	}
 })();

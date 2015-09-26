@@ -8,7 +8,7 @@
 		.controller('UsersCtrl',usersController);
 	
  usersController.$inject = ['$scope'];
-	function usersController(){
+	function usersController($scope){
 		
 	}
 /*

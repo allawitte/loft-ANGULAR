@@ -26,7 +26,7 @@
 					.controller('MainCtrl', mainController);
 
 mainController.$inject = ['$scope'];
-	function mainController(){
+	function mainController($scope){
 		
 
 	}

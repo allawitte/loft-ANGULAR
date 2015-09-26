@@ -8,7 +8,7 @@
 		.controller('HomeCtrl',homeController);
 	
  homeController.$inject = ['$scope'];
-	function homeController(){
+	function homeController($scope){
 		
 	}
 /*

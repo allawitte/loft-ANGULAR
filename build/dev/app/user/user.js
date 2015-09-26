@@ -27,7 +27,7 @@
 
 	 }
 	 userController.$inject = ['$scope'];
-	function userController(){
+	function userController($scope){
 		
 	}
 
