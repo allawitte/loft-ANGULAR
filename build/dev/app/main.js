@@ -27,7 +27,7 @@
 
 mainController.$inject = ['$scope'];
 	function mainController($scope){
-		
+		$scope.hello = "Hello";
 
 	}
 /*

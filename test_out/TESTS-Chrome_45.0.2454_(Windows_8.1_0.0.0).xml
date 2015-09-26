@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
-<testsuite name="Chrome 45.0.2454 (Windows 8.1 0.0.0)" package="" timestamp="2015-09-26T14:37:55" id="0" hostname="Alla" tests="3" errors="1" failures="3" time="0.038">
+<testsuite name="Chrome 45.0.2454 (Windows 8.1 0.0.0)" package="" timestamp="2015-09-26T16:58:04" id="0" hostname="Alla" tests="3" errors="1" failures="3" time="0.044">
   <properties>
     <property name="browser.fullName" value="Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36"/>
   </properties>
-  <testcase name="был объявлен" time="0.03" classname="Chrome_45_0_2454_(Windows_8_1_0_0_0).В модуле Loft.Users">
+  <testcase name="был объявлен" time="0.033" classname="Chrome_45_0_2454_(Windows_8_1_0_0_0).В модуле Loft.Users">
     <failure type="">TypeError: Cannot read property '$scope' of undefined
     at d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular/angular.js:9100:28
     at d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular-mocks/angular-mocks.js:1882:12
@@ -17,7 +17,7 @@ Error: Declaration Location
     at d:/Data/ProgrammingStudy/MyWorks/ngloft/build/dev/app/users/users_test.js:2:1
 </failure>
   </testcase>
-  <testcase name="который инициализирован" time="0.005" classname="Chrome_45_0_2454_(Windows_8_1_0_0_0).В модуле Loft.Users">
+  <testcase name="который инициализирован" time="0.008" classname="Chrome_45_0_2454_(Windows_8_1_0_0_0).В модуле Loft.Users">
     <failure type="">TypeError: Cannot read property '$scope' of undefined
     at d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular/angular.js:9100:28
     at d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular-mocks/angular-mocks.js:1882:12

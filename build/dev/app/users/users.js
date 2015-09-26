@@ -9,6 +9,7 @@
 	
  usersController.$inject = ['$scope'];
 	function usersController($scope){
+		$scope.name = "users";
 		
 	}
 /*

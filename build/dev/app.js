@@ -27,7 +27,7 @@
 
 mainController.$inject = ['$scope'];
 	function mainController($scope){
-		
+		$scope.hello = "Hello";
 
 	}
 /*
@@ -124,6 +124,7 @@ function HomeConfig($stateProvider){
 	
  usersController.$inject = ['$scope'];
 	function usersController($scope){
+		$scope.name = "users";
 		
 	}
 /*
