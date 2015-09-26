@@ -6,7 +6,7 @@ module.exports = function(config){
 		'bower_components/angular/angular.js',
 		'bower_components/angular-route/angular-route.js',
 		'bower_components/angular-mocks/angular-mocks.js',
-		'builds/dev/app/**/*.js'
+		'build/dev/app/**/*.js'
 		],
 		autoWatch : true,
 		frameworks: ['jasmine'],
@@ -17,7 +17,7 @@ module.exports = function(config){
 		//'Opera'
 		],
 		plugins : [
-			'karma-Chrome-launcher',
+			'karma-chrome-launcher',
 			'karma-jasmine',
 			'karma-junit-reporter'
 		],
