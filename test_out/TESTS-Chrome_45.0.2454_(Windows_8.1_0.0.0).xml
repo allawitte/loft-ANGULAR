@@ -1,14 +1,17 @@
 <?xml version="1.0"?>
-<testsuite name="Chrome 45.0.2454 (Windows 8.1 0.0.0)" package="" timestamp="2015-09-26T16:58:04" id="0" hostname="Alla" tests="3" errors="1" failures="3" time="0.044">
+<testsuite name="Chrome 45.0.2454 (Windows 8.1 0.0.0)" package="" timestamp="2015-09-27T17:45:58" id="0" hostname="Alla" tests="3" errors="1" failures="3" time="0.04">
   <properties>
     <property name="browser.fullName" value="Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36"/>
   </properties>
-  <testcase name="был объявлен" time="0.033" classname="Chrome_45_0_2454_(Windows_8_1_0_0_0).В модуле Loft.Users">
-    <failure type="">TypeError: Cannot read property '$scope' of undefined
-    at d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular/angular.js:9100:28
-    at d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular-mocks/angular-mocks.js:1882:12
-    at Object.&lt;anonymous&gt; (d:/Data/ProgrammingStudy/MyWorks/ngloft/build/dev/app/users/users_test.js:7:19)
-    at Object.invoke (d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular/angular.js:4476:17)
+  <testcase name="был объявлен" time="0.03" classname="Chrome_45_0_2454_(Windows_8_1_0_0_0).В модуле Loft.Users">
+    <failure type="">Error: [$injector:unpr] Unknown provider: $scopeProvider &lt;- $scope
+http://errors.angularjs.org/1.4.6/$injector/unpr?p0=%24scopeProvider%20%3C-%20%24scope
+    at d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular/angular.js:68:12
+    at d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular/angular.js:4287:19
+    at Object.getService [as get] (d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular/angular.js:4435:39)
+    at d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular/angular.js:4292:45
+    at getService (d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular/angular.js:4435:39)
+    at Object.invoke (d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular/angular.js:4467:13)
     at Object.workFn (d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular-mocks/angular-mocks.js:2438:20)
 Error: Declaration Location
     at window.inject.angular.mock.inject (d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular-mocks/angular-mocks.js:2409:25)
@@ -17,12 +20,15 @@ Error: Declaration Location
     at d:/Data/ProgrammingStudy/MyWorks/ngloft/build/dev/app/users/users_test.js:2:1
 </failure>
   </testcase>
-  <testcase name="который инициализирован" time="0.008" classname="Chrome_45_0_2454_(Windows_8_1_0_0_0).В модуле Loft.Users">
-    <failure type="">TypeError: Cannot read property '$scope' of undefined
-    at d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular/angular.js:9100:28
-    at d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular-mocks/angular-mocks.js:1882:12
-    at Object.&lt;anonymous&gt; (d:/Data/ProgrammingStudy/MyWorks/ngloft/build/dev/app/users/users_test.js:13:20)
-    at Object.invoke (d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular/angular.js:4476:17)
+  <testcase name="который инициализирован" time="0.007" classname="Chrome_45_0_2454_(Windows_8_1_0_0_0).В модуле Loft.Users">
+    <failure type="">Error: [$injector:unpr] Unknown provider: $scopeProvider &lt;- $scope
+http://errors.angularjs.org/1.4.6/$injector/unpr?p0=%24scopeProvider%20%3C-%20%24scope
+    at d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular/angular.js:68:12
+    at d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular/angular.js:4287:19
+    at Object.getService [as get] (d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular/angular.js:4435:39)
+    at d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular/angular.js:4292:45
+    at getService (d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular/angular.js:4435:39)
+    at Object.invoke (d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular/angular.js:4467:13)
     at Object.workFn (d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular-mocks/angular-mocks.js:2438:20)
 Error: Declaration Location
     at window.inject.angular.mock.inject (d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular-mocks/angular-mocks.js:2409:25)
@@ -32,11 +38,14 @@ Error: Declaration Location
 </failure>
   </testcase>
   <testcase name="Который можно менять" time="0.003" classname="Chrome_45_0_2454_(Windows_8_1_0_0_0).В модуле Loft.Users">
-    <failure type="">TypeError: Cannot read property '$scope' of undefined
-    at d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular/angular.js:9100:28
-    at d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular-mocks/angular-mocks.js:1882:12
-    at Object.&lt;anonymous&gt; (d:/Data/ProgrammingStudy/MyWorks/ngloft/build/dev/app/users/users_test.js:19:20)
-    at Object.invoke (d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular/angular.js:4476:17)
+    <failure type="">Error: [$injector:unpr] Unknown provider: $scopeProvider &lt;- $scope
+http://errors.angularjs.org/1.4.6/$injector/unpr?p0=%24scopeProvider%20%3C-%20%24scope
+    at d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular/angular.js:68:12
+    at d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular/angular.js:4287:19
+    at Object.getService [as get] (d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular/angular.js:4435:39)
+    at d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular/angular.js:4292:45
+    at getService (d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular/angular.js:4435:39)
+    at Object.invoke (d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular/angular.js:4467:13)
     at Object.workFn (d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular-mocks/angular-mocks.js:2438:20)
 Error: Declaration Location
     at window.inject.angular.mock.inject (d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular-mocks/angular-mocks.js:2409:25)

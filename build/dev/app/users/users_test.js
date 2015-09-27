@@ -3,19 +3,19 @@ describe('В модуле Loft.Users', function(){
 	beforeEach(module('Loft.Users'));
 
 	describe('Контроллер UsersCtrl', function(){
-		it('был объявлен', inject(function($controller){
+		it('был объявлен', inject(function($controller, $scope){
 			var testCtrl = $controller('Loft.Users');
 			expect(testCtrl).toBeDefined;
 		}));
 
 		describe('Содержит объект с пользователями', function(){
-			it('который инициализирован', inject(function($controller){
+			it('который инициализирован', inject(function($controller, $scope){
 				var testCtrl = $controller('Loft.Users');
 				expect(testCtrl.usersList).toBeDefined();
 				expect(testCtrl.usersList.length).toBeGreaterThen(0);
 
 			}));//end of 'который инициализирован'
-			it('Который можно менять', inject(function($controller){
+			it('Который можно менять', inject(function($controller, $scope){
 				var testCtrl = $controller('Loft.Users');
 
 				var length = testCtrl.usersList.length;
