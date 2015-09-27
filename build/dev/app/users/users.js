@@ -10,6 +10,12 @@
  usersController.$inject = ['$scope'];
 	function usersController($scope){
 		$scope.name = "users";
+		$scope.usersList = [
+			{
+				email: 'example@test.com',
+				name: 'Example Test'
+			}
+		];
 		
 	}
 /*
