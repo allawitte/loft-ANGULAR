@@ -1,17 +1,67 @@
 <?xml version="1.0"?>
-<testsuite name="Chrome 45.0.2454 (Windows 8.1 0.0.0)" package="" timestamp="2015-09-27T17:52:40" id="0" hostname="Alla" tests="1" errors="1" failures="1" time="0.001">
+<testsuite name="Chrome 45.0.2454 (Windows 8.1 0.0.0)" package="" timestamp="2015-09-30T19:16:34" id="0" hostname="Alla" tests="3" errors="1" failures="3" time="0.02">
   <properties>
     <property name="browser.fullName" value="Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36"/>
   </properties>
-  <testcase name="encountered a declaration exception" time="0.001" classname="Chrome_45_0_2454_(Windows_8_1_0_0_0).В модуле Loft.Users">
-    <failure type="">ReferenceError: $scope is not defined
-    at Suite.&lt;anonymous&gt; (d:/Data/ProgrammingStudy/MyWorks/ngloft/build/dev/app/users/users_test.js:6:29)
+  <testcase name="был объявлен" time="0.009" classname="Chrome_45_0_2454_(Windows_8_1_0_0_0).В модуле Loft.Users">
+    <failure type="">TypeError: UsersFactory.getPrivate is not a function
+    at new usersController (d:/Data/ProgrammingStudy/MyWorks/ngloft/build/dev/app/users/users.js:50:29)
+    at invoke (d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular/angular.js:4476:17)
+    at Object.instantiate (d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular/angular.js:4484:27)
+    at d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular/angular.js:9142:28
+    at d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular-mocks/angular-mocks.js:1882:12
+    at Object.&lt;anonymous&gt; (d:/Data/ProgrammingStudy/MyWorks/ngloft/build/dev/app/users/users_test.js:9:19)
+    at Object.invoke (d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular/angular.js:4476:17)
+    at Object.workFn (d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular-mocks/angular-mocks.js:2438:20)
+Error: Declaration Location
+    at window.inject.angular.mock.inject (d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular-mocks/angular-mocks.js:2409:25)
+    at Suite.&lt;anonymous&gt; (d:/Data/ProgrammingStudy/MyWorks/ngloft/build/dev/app/users/users_test.js:7:22)
     at Suite.&lt;anonymous&gt; (d:/Data/ProgrammingStudy/MyWorks/ngloft/build/dev/app/users/users_test.js:5:2)
     at d:/Data/ProgrammingStudy/MyWorks/ngloft/build/dev/app/users/users_test.js:2:1
 </failure>
   </testcase>
+  <testcase name="который инициализирован" time="0.006" classname="Chrome_45_0_2454_(Windows_8_1_0_0_0).В модуле Loft.Users">
+    <failure type="">TypeError: UsersFactory.getPrivate is not a function
+    at new usersController (d:/Data/ProgrammingStudy/MyWorks/ngloft/build/dev/app/users/users.js:50:29)
+    at invoke (d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular/angular.js:4476:17)
+    at Object.instantiate (d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular/angular.js:4484:27)
+    at d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular/angular.js:9142:28
+    at d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular-mocks/angular-mocks.js:1882:12
+    at Object.&lt;anonymous&gt; (d:/Data/ProgrammingStudy/MyWorks/ngloft/build/dev/app/users/users_test.js:20:20)
+    at Object.invoke (d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular/angular.js:4476:17)
+    at Object.workFn (d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular-mocks/angular-mocks.js:2438:20)
+Error: Declaration Location
+    at window.inject.angular.mock.inject (d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular-mocks/angular-mocks.js:2409:25)
+    at Suite.&lt;anonymous&gt; (d:/Data/ProgrammingStudy/MyWorks/ngloft/build/dev/app/users/users_test.js:18:34)
+    at Suite.&lt;anonymous&gt; (d:/Data/ProgrammingStudy/MyWorks/ngloft/build/dev/app/users/users_test.js:16:3)
+    at Suite.&lt;anonymous&gt; (d:/Data/ProgrammingStudy/MyWorks/ngloft/build/dev/app/users/users_test.js:5:2)
+</failure>
+  </testcase>
+  <testcase name="Который можно менять" time="0.005" classname="Chrome_45_0_2454_(Windows_8_1_0_0_0).В модуле Loft.Users">
+    <failure type="">TypeError: UsersFactory.getPrivate is not a function
+    at new usersController (d:/Data/ProgrammingStudy/MyWorks/ngloft/build/dev/app/users/users.js:50:29)
+    at invoke (d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular/angular.js:4476:17)
+    at Object.instantiate (d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular/angular.js:4484:27)
+    at d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular/angular.js:9142:28
+    at d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular-mocks/angular-mocks.js:1882:12
+    at Object.&lt;anonymous&gt; (d:/Data/ProgrammingStudy/MyWorks/ngloft/build/dev/app/users/users_test.js:30:20)
+    at Object.invoke (d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular/angular.js:4476:17)
+    at Object.workFn (d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular-mocks/angular-mocks.js:2438:20)
+Error: Declaration Location
+    at window.inject.angular.mock.inject (d:/Data/ProgrammingStudy/MyWorks/ngloft/bower_components/angular-mocks/angular-mocks.js:2409:25)
+    at Suite.&lt;anonymous&gt; (d:/Data/ProgrammingStudy/MyWorks/ngloft/build/dev/app/users/users_test.js:28:31)
+    at Suite.&lt;anonymous&gt; (d:/Data/ProgrammingStudy/MyWorks/ngloft/build/dev/app/users/users_test.js:16:3)
+    at Suite.&lt;anonymous&gt; (d:/Data/ProgrammingStudy/MyWorks/ngloft/build/dev/app/users/users_test.js:5:2)
+</failure>
+  </testcase>
   <system-out>
-    <![CDATA[
+    <![CDATA[Chrome 45.0.2454 (Windows 8.1 0.0.0) LOG: '====== Run Users ============'
+,Chrome 45.0.2454 (Windows 8.1 0.0.0) LOG: Scope{$$childTail: null, $$childHead: null, $$nextSibling: null, $$watchers: null, $$listeners: Object{}, $$listenerCount: Object{}, $$watchersCount: 0, $id: 2, $$ChildScope: null, $parent: Scope{$id: 1, $$childTail: Scope{$$childTail: ..., $$childHead: ..., $$nextSibling: ..., $$watchers: ..., $$listeners: ..., $$listenerCount: ..., $$watchersCount: ..., $id: ..., $$ChildScope: ..., $parent: ..., $$prevSibling: ...}, $$childHead: Scope{$$childTail: ..., $$childHead: ..., $$nextSibling: ..., $$watchers: ..., $$listeners: ..., $$listenerCount: ..., $$watchersCount: ..., $id: ..., $$ChildScope: ..., $parent: ..., $$prevSibling: ...}, $$prevSibling: null, $$nextSibling: null, $$watchers: null, $parent: null, $$phase: null, $root: Scope{$id: ..., $$childTail: ..., $$childHead: ..., $$prevSibling: ..., $$nextSibling: ..., $$watchers: ..., $parent: ..., $$phase: ..., $root: ..., $$destroyed: ..., $$listeners: ..., $$listenerCount: ..., $$watchersCount: ..., $$isolateBindings: ..., $$asyncQueue: ..., $$postDigestQueue: ..., $$applyAsyncQueue: ..., $$ChildScope: ...}, $$destroyed: false, $$listeners: Object{}, $$listenerCount: Object{}, $$watchersCount: 0, $$isolateBindings: null, $$asyncQueue: [], $$postDigestQueue: [], $$applyAsyncQueue: [], $$ChildScope: function ChildScope() { ... }}, $$prevSibling: null}
+,Chrome 45.0.2454 (Windows 8.1 0.0.0) LOG: '====== Run Users ============'
+,Chrome 45.0.2454 (Windows 8.1 0.0.0) LOG: Scope{$$childTail: null, $$childHead: null, $$nextSibling: null, $$watchers: null, $$listeners: Object{}, $$listenerCount: Object{}, $$watchersCount: 0, $id: 4, $$ChildScope: null, $parent: Scope{$id: 3, $$childTail: Scope{$$childTail: ..., $$childHead: ..., $$nextSibling: ..., $$watchers: ..., $$listeners: ..., $$listenerCount: ..., $$watchersCount: ..., $id: ..., $$ChildScope: ..., $parent: ..., $$prevSibling: ...}, $$childHead: Scope{$$childTail: ..., $$childHead: ..., $$nextSibling: ..., $$watchers: ..., $$listeners: ..., $$listenerCount: ..., $$watchersCount: ..., $id: ..., $$ChildScope: ..., $parent: ..., $$prevSibling: ...}, $$prevSibling: null, $$nextSibling: null, $$watchers: null, $parent: null, $$phase: null, $root: Scope{$id: ..., $$childTail: ..., $$childHead: ..., $$prevSibling: ..., $$nextSibling: ..., $$watchers: ..., $parent: ..., $$phase: ..., $root: ..., $$destroyed: ..., $$listeners: ..., $$listenerCount: ..., $$watchersCount: ..., $$isolateBindings: ..., $$asyncQueue: ..., $$postDigestQueue: ..., $$applyAsyncQueue: ..., $$ChildScope: ...}, $$destroyed: false, $$listeners: Object{}, $$listenerCount: Object{}, $$watchersCount: 0, $$isolateBindings: null, $$asyncQueue: [], $$postDigestQueue: [], $$applyAsyncQueue: [], $$ChildScope: function ChildScope() { ... }}, $$prevSibling: null}
+,Chrome 45.0.2454 (Windows 8.1 0.0.0) LOG: '====== Run Users ============'
+,Chrome 45.0.2454 (Windows 8.1 0.0.0) LOG: Scope{$$childTail: null, $$childHead: null, $$nextSibling: null, $$watchers: null, $$listeners: Object{}, $$listenerCount: Object{}, $$watchersCount: 0, $id: 6, $$ChildScope: null, $parent: Scope{$id: 5, $$childTail: Scope{$$childTail: ..., $$childHead: ..., $$nextSibling: ..., $$watchers: ..., $$listeners: ..., $$listenerCount: ..., $$watchersCount: ..., $id: ..., $$ChildScope: ..., $parent: ..., $$prevSibling: ...}, $$childHead: Scope{$$childTail: ..., $$childHead: ..., $$nextSibling: ..., $$watchers: ..., $$listeners: ..., $$listenerCount: ..., $$watchersCount: ..., $id: ..., $$ChildScope: ..., $parent: ..., $$prevSibling: ...}, $$prevSibling: null, $$nextSibling: null, $$watchers: null, $parent: null, $$phase: null, $root: Scope{$id: ..., $$childTail: ..., $$childHead: ..., $$prevSibling: ..., $$nextSibling: ..., $$watchers: ..., $parent: ..., $$phase: ..., $root: ..., $$destroyed: ..., $$listeners: ..., $$listenerCount: ..., $$watchersCount: ..., $$isolateBindings: ..., $$asyncQueue: ..., $$postDigestQueue: ..., $$applyAsyncQueue: ..., $$ChildScope: ...}, $$destroyed: false, $$listeners: Object{}, $$listenerCount: Object{}, $$watchersCount: 0, $$isolateBindings: null, $$asyncQueue: [], $$postDigestQueue: [], $$applyAsyncQueue: [], $$ChildScope: function ChildScope() { ... }}, $$prevSibling: null}
+
 ]]>
   </system-out>
   <system-err/>

@@ -3,22 +3,37 @@ describe('В модуле Loft.Users', function(){
 	beforeEach(module('Loft.Users'));
 
 	describe('Контроллер UsersCtrl', function(){
-		it('был объявлен', inject($scope, function($controller){
-			var testCtrl = $controller('Loft.Users');
+
+		it('был объявлен', inject(function($controller, $rootScope){
+			var scope = $rootScope.$new();
+			var testCtrl = $controller('UsersCtrl',{
+				'$scope':scope
+			});
+
 			expect(testCtrl).toBeDefined;
 		}));
 
 		describe('Содержит объект с пользователями', function(){
-			it('который инициализирован', inject($scope, function($controller){
-				var testCtrl = $controller('Loft.Users');
+
+			it('который инициализирован', inject(function($controller, $rootScope){
+				var scope = $rootScope.$new();
+				var testCtrl = $controller('UsersCtrl',{
+					'$scope':scope
+				});
+				console.log(testCtrl);
 				expect(testCtrl.usersList).toBeDefined();
-				expect(testCtrl.usersList.length).toBeGreaterThen(0);
+				expect(testCtrl.usersList.length).toBeGreaterThan(0);
 
 			}));//end of 'который инициализирован'
-			it('Который можно менять', inject($scope, function($controller){
-				var testCtrl = $controller('Loft.Users');
+			it('Который можно менять', inject(function($controller, $rootScope){
+				var scope = $rootScope.$new();
+				var testCtrl = $controller('UsersCtrl',{
+					'$scope':scope
+				});
+				console.log(testCtrl.usersList);
 
 				var length = testCtrl.usersList.length;
+
 
 				testCtrl.addUser({
 					name: "testName",

@@ -23,6 +23,7 @@
 					'Loft.Home'
 					])
 					.config(Config)
+					.run(Run)
 					.controller('MainCtrl', mainController);
 
 mainController.$inject = ['$scope'];
@@ -41,5 +42,11 @@ function Config($urlRouterProvider){
 		$urlRouterProvider		
 		.otherwise('/')
 	}
+
+function Run(FIREBASE_URL, configOptions){
+	console.log('Run Main');
+	console.log(FIREBASE_URL);
+	console.log(configOptions);
+}
 
 })();
