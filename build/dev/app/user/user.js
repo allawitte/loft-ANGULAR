@@ -26,7 +26,7 @@
 		});
 
 	 }
-	 userController.$inject = ['$scope'];
+	//ngInject
 	function userController($scope){
 		
 	}

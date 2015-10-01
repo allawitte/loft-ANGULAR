@@ -7,7 +7,7 @@
 		.config(HomeConfig)
 		.controller('HomeCtrl',homeController);
 	
- homeController.$inject = ['$scope'];
+ 	//ngInject
 	function homeController($scope){
 		
 	}

@@ -26,7 +26,7 @@
 					.run(Run)
 					.controller('MainCtrl', mainController);
 
-mainController.$inject = ['$scope'];
+	//ngInject
 	function mainController($scope){
 		$scope.hello = "Hello";
 
