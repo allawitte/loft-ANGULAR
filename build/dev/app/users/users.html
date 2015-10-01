@@ -1,1 +1,23 @@
 <h1>Users</h1>
+<div class="container" >	
+	<!--<pre>{{usc}}</pre>-->
+	<a ui-sref="users.state1">State1</a>
+	<a ui-sref="users.state2">State2</a>
+
+	<div ui-view></div>
+	<table class="table">
+		<tr>
+			<th># User </th>
+			<th>User Name</tdh>
+			<th>Eye Color</tdh>
+			<th>Account Balance</tdh>
+		</tr>
+		<tr ng-repeat="user in usc.list">
+			<td>{{$index+1}}</td>
+			<td>{{user.name}}</td>
+			<td>{{user.eyeColor}}</td>
+			<td>{{user.balance}}</td>
+		</tr>
+
+	</table>
+</div>
