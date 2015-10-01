@@ -2953,12 +2953,12 @@
 				if((i+1) == firstPart){
 					curString = curString+' ';
 				}
-				if(((i+1-firstPart)%3 == 0) && (curr[i+1]!='.') ){
+				if(((i+1-firstPart)%3 == 0) && (curr[i+1]!='.') &&(!(i+1) == firstPart)){
 					curString= curString+' ';
 				}
 			}
 			curString +=' руб.';
-			console.log(curString);
+			//console.log(curString);
 			return curString;
 		}
 		function RubleFilter(){
@@ -2966,28 +2966,7 @@
 				
 				
 				angular.forEach(input, function(elem, index){
-				//	var val = toRuble(elem.balance);
-				/*	var curr = elem.balance;
-					curr = Math.ceil((curr)*100)/100;
-					var currInt = Math.ceil(curr);
-					var firstPart = currInt.toString(10).length%3;
-					var groups = (currInt.toString(10).length - firstPart)/3;
-					curr = curr.toString(10);
-					var len = curr.length;
-					var curString = '';
-					for(var i = 0; i < len; i++){
-						curString = curString+curr[i];
-						if((i+1) == firstPart){
-							curString = curString+' ';
-						}
-						if(((i+1-firstPart)%3 == 0) && (curr[i+1]!='.') ){
-							curString= curString+' ';
-						}
-					}
-					
-					//console.log('curr  ', curr, '  curString  ', curString);
-					curString +=' руб.';
-					*/
+				
 					elem.balance = toRuble(elem.balance);
 					
 				});
