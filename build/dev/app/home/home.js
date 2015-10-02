@@ -2,7 +2,8 @@
 	'use strict';
 	angular.module('Loft.Home',[
 		//'ngRoute'
-		'ui.router'
+		'ui.router',
+		'ui.bootstrap'
 		])
 		.config(HomeConfig)
 		.controller('HomeCtrl',homeController);

@@ -1,7 +1,8 @@
 ;(function(){
 	'use strict';
 	angular.module('Loft.User',[
-		'ui.router'
+		'ui.router',
+		'ui.bootstrap'
 		])
 	.config(UserConfig)
 	.controller('UserCtrl',userController);

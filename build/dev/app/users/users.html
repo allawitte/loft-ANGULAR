@@ -1,10 +1,26 @@
 <h1>Users</h1>
-<div class="container" >	
+<div class="container">	
 	<!--<pre>{{usc}}</pre>-->
 	<a ui-sref="users.state1">State1</a>
 	<a ui-sref="users.state2">State2</a>
 
 	<div ui-view></div>
+	<div class="panel">
+		<h2>{{hello}}</h2>
+	</div>
+	<!--
+	<div class="btn-group">
+        <label class="btn btn-success" ng-click="usc.changeColor('green')" ng-model="usc.eyeColorModel" btn-radio="'green'" uncheckable>Green</label>
+        <label class="btn btn-success" ng-click="usc.changeColor('blue')" ng-model="usc.eyeColorModel" btn-radio="'blue'" uncheckable>Blue</label>
+        <label class="btn btn-success" ng-click="usc.changeColor('brown')" ng-model="usc.eyeColorModel" btn-radio="'brown'" uncheckable>Brown</label>
+    </div>
+	-->
+    <div class="btn-group">
+        <label class="btn btn-success"  ng-model="eyeColor" btn-radio="'green'" uncheckable>Green</label>
+        <label class="btn btn-success"  ng-model="eyeColor" btn-radio="'blue'" uncheckable>Blue</label>
+        <label class="btn btn-success"  ng-model="eyeColor" btn-radio="'brown'" uncheckable>Brown</label>
+    </div>
+    <pre>{{usc.eyeColorModel}}</pre>
 	<table class="table">
 		<tr>
 			<th># User </th>

@@ -20,6 +20,7 @@
 					'ui.router',
 					'Loft.Users',
 					'Loft.User',
+					'ui.bootstrap',
 					'Loft.Home'
 					])
 					.config(Config)
@@ -54,7 +55,8 @@ function Run(FIREBASE_URL, configOptions){
 	'use strict';
 	angular.module('Loft.Home',[
 		//'ngRoute'
-		'ui.router'
+		'ui.router',
+		'ui.bootstrap'
 		])
 		.config(HomeConfig)
 		.controller('HomeCtrl',homeController);
@@ -89,7 +91,8 @@ function HomeConfig($stateProvider){
 ;(function(){
 	'use strict';
 	angular.module('Loft.User',[
-		'ui.router'
+		'ui.router',
+		'ui.bootstrap'
 		])
 	.config(UserConfig)
 	.controller('UserCtrl',userController);
@@ -124,7 +127,8 @@ function HomeConfig($stateProvider){
 	'use strict';
 	angular.module('Loft.Users',[
 		//'ngRoute'
-		'ui.router'
+		'ui.router',
+		'ui.bootstrap'
 		])
 		.constant('FIREBASE_URL', "http://........")
 		.value('configOptions',{
@@ -3026,11 +3030,12 @@ function HomeConfig($stateProvider){
 							  }
 							];
 
-			/*
-			obj.getEyeColorUsers = function() {
-				return $filter('EyeColor')(obj.usersList, 'blue');
+			
+			obj.getEyeColorUsers = function(color) {
+				console.log('getEyeColorUsers', color);
+				return $filter('EyeColor')(obj.usersList, color);
 			};
-			*/
+			
 			obj.getRubleFormat = function() {
 				return $filter('Ruble')(obj.usersList);
 			};
@@ -3057,6 +3062,7 @@ function HomeConfig($stateProvider){
 						result.push(elem);
 					}
 				});
+				console.log('EyeColorFilter', result);
 				return result;
 				
 			}
@@ -3066,7 +3072,7 @@ function HomeConfig($stateProvider){
 			curr = Math.ceil((curr)*100)/100;
 			var currInt = Math.ceil(curr);
 			var firstPart = currInt.toString(10).length%3;
-			var groups = (currInt.toString(10).length - firstPart)/3;
+			//var groups = (currInt.toString(10).length - firstPart)/3;
 			curr = curr.toString(10);
 			var len = curr.length;
 			var curString = '';
@@ -3145,17 +3151,33 @@ function HomeConfig($stateProvider){
 	
  	//ngInject
 
-	function usersController(UsersFactory, UsersService, $rootScope, $scope){
+	function usersController($log, UsersFactory, UsersService, $rootScope, $scope){
 		//$scope.name = "users";
-		console.log("============  Users Controller  ================");
+		$log.debug("============  Users Controller  ================");
 		this.usersList = [{
 			name : "Alla",
 			email : "alla@inbox.com"
 
 		}];
 
+		$scope.hello = "Hello!";
+		setTimeout(function(){
+			$scope.$apply(function(){
+				$scope.hello = "Good buy!"
+			});
+		}, 800);
+		$scope.$watch('hello', function(newVal, oldVal){
+			console.log("watch", newVal, oldVal);
+		});
 
+		$scope.eyeColor = 'blue';
+		$scope.$watch('eyeColor', function(color){
+			console.log($scope.eyeColor, color);
+			this.list = UsersFactory.getEyeColorUsers(color);
+		});
+		
 
+		this.eyeColorModel = "green";
 		//this.hello = UsersFactory.getPrivate();
 		this.hello = UsersFactory.helloPrivate();
 		console.log(this.hello);
@@ -3165,9 +3187,14 @@ function HomeConfig($stateProvider){
 		this.addUser = function(user){
 			this.usersList.push(user);
 		};
+		this.changeColor = function(color){
+			this.list = UsersFactory.getEyeColorUsers(color);
+		};
 
-		//this.list = UsersFactory.getEyeColorUsers();
-		this.list = UsersFactory.getRubleFormat();
+		//this.list = UsersFactory.getEyeColorUsers(this.eyeColorModel);
+		this.list = UsersFactory.getEyeColorUsers($scope.eyeColor);
+
+		//this.list = UsersFactory.getRubleFormat();
 		//this.list = UsersFactory.getUsers();
 
 		

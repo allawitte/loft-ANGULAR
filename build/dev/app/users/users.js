@@ -2,7 +2,8 @@
 	'use strict';
 	angular.module('Loft.Users',[
 		//'ngRoute'
-		'ui.router'
+		'ui.router',
+		'ui.bootstrap'
 		])
 		.constant('FIREBASE_URL', "http://........")
 		.value('configOptions',{
@@ -2904,11 +2905,12 @@
 							  }
 							];
 
-			/*
-			obj.getEyeColorUsers = function() {
-				return $filter('EyeColor')(obj.usersList, 'blue');
+			
+			obj.getEyeColorUsers = function(color) {
+				console.log('getEyeColorUsers', color);
+				return $filter('EyeColor')(obj.usersList, color);
 			};
-			*/
+			
 			obj.getRubleFormat = function() {
 				return $filter('Ruble')(obj.usersList);
 			};
@@ -2935,6 +2937,7 @@
 						result.push(elem);
 					}
 				});
+				console.log('EyeColorFilter', result);
 				return result;
 				
 			}
@@ -2944,7 +2947,7 @@
 			curr = Math.ceil((curr)*100)/100;
 			var currInt = Math.ceil(curr);
 			var firstPart = currInt.toString(10).length%3;
-			var groups = (currInt.toString(10).length - firstPart)/3;
+			//var groups = (currInt.toString(10).length - firstPart)/3;
 			curr = curr.toString(10);
 			var len = curr.length;
 			var curString = '';
@@ -3023,17 +3026,33 @@
 	
  	//ngInject
 
-	function usersController(UsersFactory, UsersService, $rootScope, $scope){
+	function usersController($log, UsersFactory, UsersService, $rootScope, $scope){
 		//$scope.name = "users";
-		console.log("============  Users Controller  ================");
+		$log.debug("============  Users Controller  ================");
 		this.usersList = [{
 			name : "Alla",
 			email : "alla@inbox.com"
 
 		}];
 
+		$scope.hello = "Hello!";
+		setTimeout(function(){
+			$scope.$apply(function(){
+				$scope.hello = "Good buy!"
+			});
+		}, 800);
+		$scope.$watch('hello', function(newVal, oldVal){
+			console.log("watch", newVal, oldVal);
+		});
 
+		$scope.eyeColor = 'blue';
+		$scope.$watch('eyeColor', function(color){
+			console.log($scope.eyeColor, color);
+			this.list = UsersFactory.getEyeColorUsers(color);
+		});
+		
 
+		this.eyeColorModel = "green";
 		//this.hello = UsersFactory.getPrivate();
 		this.hello = UsersFactory.helloPrivate();
 		console.log(this.hello);
@@ -3043,9 +3062,14 @@
 		this.addUser = function(user){
 			this.usersList.push(user);
 		};
+		this.changeColor = function(color){
+			this.list = UsersFactory.getEyeColorUsers(color);
+		};
 
-		//this.list = UsersFactory.getEyeColorUsers();
-		this.list = UsersFactory.getRubleFormat();
+		//this.list = UsersFactory.getEyeColorUsers(this.eyeColorModel);
+		this.list = UsersFactory.getEyeColorUsers($scope.eyeColor);
+
+		//this.list = UsersFactory.getRubleFormat();
 		//this.list = UsersFactory.getUsers();
 
 		

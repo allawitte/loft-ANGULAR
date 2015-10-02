@@ -20,6 +20,7 @@
 					'ui.router',
 					'Loft.Users',
 					'Loft.User',
+					'ui.bootstrap',
 					'Loft.Home'
 					])
 					.config(Config)
