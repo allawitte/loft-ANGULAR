@@ -161,7 +161,7 @@ function HomeConfig($stateProvider){
 							    "age": 30, 
 							    "email": "transimon@comverges.com", 
 							    "eyeColor": "blue", 
-							    "balance": 1243.1853000000001, 
+							    "balance": 1243185300.0000001, 
 							    "id": "56066aa99c1d3a2cca792504"
 							  }, 
 							  {
@@ -171,7 +171,7 @@ function HomeConfig($stateProvider){
 							    "age": 25, 
 							    "email": "melvagreen@comverges.com", 
 							    "eyeColor": "blue", 
-							    "balance": 3372.7350999999999, 
+							    "balance": 337273509.99999999, 
 							    "id": "56066aa9ce7855172c4d41f9"
 							  }, 
 							  {
@@ -181,7 +181,7 @@ function HomeConfig($stateProvider){
 							    "age": 24, 
 							    "email": "riversforeman@comverges.com", 
 							    "eyeColor": "blue", 
-							    "balance": 3869.7595000000001, 
+							    "balance": 38697595.000000001, 
 							    "id": "56066aa9a9c3db3f10763aac"
 							  }, 
 							  {
@@ -191,7 +191,7 @@ function HomeConfig($stateProvider){
 							    "age": 37, 
 							    "email": "dominiquejoseph@comverges.com", 
 							    "eyeColor": "brown", 
-							    "balance": 1902.4782, 
+							    "balance": 1902478.2, 
 							    "id": "56066aa903dd0f0c8457d62a"
 							  }, 
 							  {
@@ -3075,7 +3075,7 @@ function HomeConfig($stateProvider){
 				if((i+1) == firstPart){
 					curString = curString+' ';
 				}
-				if(((i+1-firstPart)%3 == 0) && (curr[i+1]!='.') &&(!(i+1) == firstPart)){
+				if(((i+1-firstPart)%3 == 0) && (curr[i+1]!='.') &&!((i+1) == firstPart)){
 					curString= curString+' ';
 				}
 			}
