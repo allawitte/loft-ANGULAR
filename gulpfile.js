@@ -87,7 +87,10 @@ gulp.task('pjs', function(){
 		//'bower_components/angular-route/angular-route.js',
 		'bower_components/angular-ui-router/release/angular-ui-router.min.js',
 		'bower_components/angular-bootstrap/ui-bootstrap.min.js',
-		'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js'
+		'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
+		'bower_components/firebase/firebase.js',
+		'bower_components/angularfire/dist/angularfire.js',
+		'bower_components/angular-ui-grid/ui-grid.js'
 		])
 		.pipe(ngAnnotate())
 		.pipe(concat('libs.js'))

@@ -5,7 +5,7 @@
 		'ui.router',
 		'ui.bootstrap'
 		])
-		.constant('FIREBASE_URL', "http://........")
+		.constant('FIREBASE_URL', "http://awfitness.firebaseio.com")
 		.value('configOptions',{
 			lang: 'ru',
 			timezone: '-3'
@@ -3034,6 +3034,7 @@
 			email : "alla@inbox.com"
 
 		}];
+		var self = this;
 
 		$scope.hello = "Hello!";
 		setTimeout(function(){
@@ -3048,53 +3049,34 @@
 		$scope.eyeColor = 'blue';
 		$scope.$watch('eyeColor', function(color){
 			console.log($scope.eyeColor, color);
-			this.list = UsersFactory.getEyeColorUsers(color);
+			self.list = UsersFactory.getEyeColorUsers(color);
 		});
 		
 
-		this.eyeColorModel = "green";
-		//this.hello = UsersFactory.getPrivate();
-		this.hello = UsersFactory.helloPrivate();
-		console.log(this.hello);
+		self.eyeColorModel = "green";
+		//self.hello = UsersFactory.getPrivate();
+		self.hello = UsersFactory.helloPrivate();
+		console.log(self.hello);
 
 		console.log("UsersService.Private", UsersService.getPrivate());
 
-		this.addUser = function(user){
-			this.usersList.push(user);
+		self.addUser = function(user){
+			self.usersList.push(user);
 		};
-		this.changeColor = function(color){
-			this.list = UsersFactory.getEyeColorUsers(color);
+		self.changeColor = function(color){
+			self.list = UsersFactory.getEyeColorUsers(color);
 		};
 
-		//this.list = UsersFactory.getEyeColorUsers(this.eyeColorModel);
-		this.list = UsersFactory.getEyeColorUsers($scope.eyeColor);
+		//self.list = UsersFactory.getEyeColorUsers(self.eyeColorModel);
+		self.list = UsersFactory.getEyeColorUsers($scope.eyeColor);
 
-		//this.list = UsersFactory.getRubleFormat();
-		//this.list = UsersFactory.getUsers();
+		self.list = UsersFactory.getRubleFormat();
+		//self.list = UsersFactory.getUsers();
 
 		
 		
 	}
-/*
-	function UsersConfig($routeProvider){
-		$routeProvider
-		.when('/users',{
-			templateUrl : 'app/users/users.html',
-			controller : 'UsersCtrl',
-			controllerAs : 'usc'
-		});
-	}
 
-*/
-/*
-	 код должен быть:
-	function UsersConfig($stateProvider, UsersProvProvider){
-	аналогично в объявлении функции
-	UsersProvProvider.setPrivate("Not almost private");
-	и ведь мы об этом говорили на вебинаре
-	что при обращении к провайдеру на этапе конфига надо на конце дописывать Provider
-	иначе он не будет видеть закрытые методы в нем, а точнее вообще не будет воспринимать провайдер как открытую часть провайдера
-*/
 //ngInject
 function UsersConfig($provide, $stateProvider, $logProvider, UsersProvProvider){
 		$stateProvider

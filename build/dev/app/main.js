@@ -21,7 +21,8 @@
 					'Loft.Users',
 					'Loft.User',
 					'ui.bootstrap',
-					'Loft.Home'
+					'Loft.Home',
+					'Loft.Fire'
 					])
 					.config(Config)
 					.run(Run)

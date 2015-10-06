@@ -21,7 +21,8 @@
 					'Loft.Users',
 					'Loft.User',
 					'ui.bootstrap',
-					'Loft.Home'
+					'Loft.Home',
+					'Loft.Fire'
 					])
 					.config(Config)
 					.run(Run)
@@ -51,6 +52,7 @@ function Run(FIREBASE_URL, configOptions){
 }
 
 })();
+
 ;(function(){
 	'use strict';
 	angular.module('Loft.Home',[
@@ -118,9 +120,84 @@ function HomeConfig($stateProvider){
 
 	 }
 	//ngInject
-	function userController($scope){
+	function userController($scope, $q, UsersRepository){
+		console.log('=================   UserController =================');
+		//Mother
+		var self = this;
+
 		
-	}
+
+		//seds kids to the shops
+
+		function sonGo2Shop(){
+			var deffered = $q.defer();
+			
+			setTimeout(function(){
+				deffered.notify('Son went to the shop');
+				setTimeout(function(){
+					if(parseInt(Math.random()*5)%2)
+						deffered.resolve("sossege is in the basket");
+					else
+						deffered.reject('no sossege');
+				},400);
+			}, 1500);
+
+
+			return deffered.promise;
+		}//end of sonGo2Shop
+
+		function daughterGo2Shop(){
+			var deffered = $q.defer();
+			
+			setTimeout(function(){
+				deffered.notify('Doughter went to the farmer');
+				setTimeout(function(){
+					if(parseInt(Math.random()*5)%2)
+						deffered.resolve("eggs is in the basket");
+					else
+						deffered.reject('no eggs');
+				},500);
+			}, 2500);
+
+
+			return deffered.promise;
+		}//end of doughterGo2Shop
+
+
+		self.promiseTest = function(){
+			$q.all([sonGo2Shop(), daughterGo2Shop()])//этот метод следит за тем, что либо все элементы массива кончаются успешно, либо все закончились неудачно и тогда запускаются определенные события
+			.then(
+				//resolve
+				function(data){			
+				console.log('After children resolved', data);
+				},
+				//reject
+				function(data){
+					console.log('After schildren rejected', data);
+				},
+				//notify
+				function(data){
+					console.log('Notify children ', data);
+				}
+				);
+
+			//as soon they are back - she starts to coock some salad
+
+		}//end of promiseTest
+
+		/*================   firebase part  ===================*/
+		var users = UsersRepository.getAllUsers();
+		users.$loaded(function(_userslist){
+		//здесь происходит обработка промиса $loaded
+
+			self.list = _userslist;
+			
+		});//end of $loaded
+
+		users.$watch(function(_userslist){
+			self.list = _userslist;
+		});
+	}//end of controller
 
 })();
 ;(function(){
@@ -130,7 +207,7 @@ function HomeConfig($stateProvider){
 		'ui.router',
 		'ui.bootstrap'
 		])
-		.constant('FIREBASE_URL', "http://........")
+		.constant('FIREBASE_URL', "http://awfitness.firebaseio.com")
 		.value('configOptions',{
 			lang: 'ru',
 			timezone: '-3'
@@ -3159,6 +3236,7 @@ function HomeConfig($stateProvider){
 			email : "alla@inbox.com"
 
 		}];
+		var self = this;
 
 		$scope.hello = "Hello!";
 		setTimeout(function(){
@@ -3173,53 +3251,34 @@ function HomeConfig($stateProvider){
 		$scope.eyeColor = 'blue';
 		$scope.$watch('eyeColor', function(color){
 			console.log($scope.eyeColor, color);
-			this.list = UsersFactory.getEyeColorUsers(color);
+			self.list = UsersFactory.getEyeColorUsers(color);
 		});
 		
 
-		this.eyeColorModel = "green";
-		//this.hello = UsersFactory.getPrivate();
-		this.hello = UsersFactory.helloPrivate();
-		console.log(this.hello);
+		self.eyeColorModel = "green";
+		//self.hello = UsersFactory.getPrivate();
+		self.hello = UsersFactory.helloPrivate();
+		console.log(self.hello);
 
 		console.log("UsersService.Private", UsersService.getPrivate());
 
-		this.addUser = function(user){
-			this.usersList.push(user);
+		self.addUser = function(user){
+			self.usersList.push(user);
 		};
-		this.changeColor = function(color){
-			this.list = UsersFactory.getEyeColorUsers(color);
+		self.changeColor = function(color){
+			self.list = UsersFactory.getEyeColorUsers(color);
 		};
 
-		//this.list = UsersFactory.getEyeColorUsers(this.eyeColorModel);
-		this.list = UsersFactory.getEyeColorUsers($scope.eyeColor);
+		//self.list = UsersFactory.getEyeColorUsers(self.eyeColorModel);
+		self.list = UsersFactory.getEyeColorUsers($scope.eyeColor);
 
-		//this.list = UsersFactory.getRubleFormat();
-		//this.list = UsersFactory.getUsers();
+		self.list = UsersFactory.getRubleFormat();
+		//self.list = UsersFactory.getUsers();
 
 		
 		
 	}
-/*
-	function UsersConfig($routeProvider){
-		$routeProvider
-		.when('/users',{
-			templateUrl : 'app/users/users.html',
-			controller : 'UsersCtrl',
-			controllerAs : 'usc'
-		});
-	}
 
-*/
-/*
-	 код должен быть:
-	function UsersConfig($stateProvider, UsersProvProvider){
-	аналогично в объявлении функции
-	UsersProvProvider.setPrivate("Not almost private");
-	и ведь мы об этом говорили на вебинаре
-	что при обращении к провайдеру на этапе конфига надо на конце дописывать Provider
-	иначе он не будет видеть закрытые методы в нем, а точнее вообще не будет воспринимать провайдер как открытую часть провайдера
-*/
 //ngInject
 function UsersConfig($provide, $stateProvider, $logProvider, UsersProvProvider){
 		$stateProvider
@@ -3259,3 +3318,46 @@ function UsersConfig($provide, $stateProvider, $logProvider, UsersProvProvider){
 
 })();
 
+
+;(function(){
+	'use strict';
+
+	angular.module('Loft.Fire',[
+		'firebase'
+		])
+	.factory('dbc', dbcFactory);
+
+	function dbcFactory(FIREBASE_URL, $firebaseAuth){
+		var obj = {};
+
+		var reference = new Firebase(FIREBASE_URL);
+
+		obj.getRef = function(){
+			return reefrence;
+		}
+
+		return obj;
+
+	}
+})
+;(function(){
+	'use strict';
+
+	angular.module('Loft.Users.Repository',[
+		'Loft.Fire'
+		])
+	.factory('UsersRepository',UsersRepositoryFactory);
+
+	function UsersRepositoryFactory(dbc){
+		var obj = {};
+
+		obj.getAllUsers = function(){
+			var ref = dbc.getRef();
+
+			//var refUsers = ref.child('users'); //установление соединения  объектом users
+
+			return $firebaseArray(ref.child('users'));// получение массива объектов users 
+		}
+		return obj;
+	}
+})

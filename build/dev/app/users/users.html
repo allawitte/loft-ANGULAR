@@ -20,7 +20,7 @@
         <label class="btn btn-success"  ng-model="eyeColor" btn-radio="'blue'" uncheckable>Blue</label>
         <label class="btn btn-success"  ng-model="eyeColor" btn-radio="'brown'" uncheckable>Brown</label>
     </div>
-    <pre>{{usc.eyeColorModel}}</pre>
+    <pre>{{eyeColor}}</pre>
 	<table class="table">
 		<tr>
 			<th># User </th>
@@ -31,7 +31,7 @@
 		<tr ng-repeat="user in usc.list">
 			<td>{{$index+1}}</td>
 			<td>{{user.name}}</td>
-			<td>{{user.eyeColor}}</td>
+			<td ng-class="{'eye-{{user.eyeColor}}' : 1}">{{user.eyeColor}}</td>
 			<td>{{user.balance}}</td>
 		</tr>
 
