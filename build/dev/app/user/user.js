@@ -2,7 +2,8 @@
 	'use strict';
 	angular.module('Loft.User',[
 		'ui.router',
-		'ui.bootstrap'
+		'ui.bootstrap',
+		'Loft.Users.Repository'
 		])
 	.config(UserConfig)
 	.controller('UserCtrl',userController);

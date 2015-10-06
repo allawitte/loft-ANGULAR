@@ -94,7 +94,8 @@ function HomeConfig($stateProvider){
 	'use strict';
 	angular.module('Loft.User',[
 		'ui.router',
-		'ui.bootstrap'
+		'ui.bootstrap',
+		'Loft.Users.Repository'
 		])
 	.config(UserConfig)
 	.controller('UserCtrl',userController);
@@ -3322,7 +3323,7 @@ function UsersConfig($provide, $stateProvider, $logProvider, UsersProvProvider){
 ;(function(){
 	'use strict';
 
-	angular.module('Loft.Fire',[
+	angular.module('Loft.Fire', [
 		'firebase'
 		])
 	.factory('dbc', dbcFactory);
@@ -3334,20 +3335,20 @@ function UsersConfig($provide, $stateProvider, $logProvider, UsersProvProvider){
 
 		obj.getRef = function(){
 			return reefrence;
-		}
+		};
 
 		return obj;
 
-	}
-})
+	}//end of factory
+})();
 ;(function(){
 	'use strict';
 
 	angular.module('Loft.Users.Repository',[
 		'Loft.Fire'
 		])
-	.factory('UsersRepository',UsersRepositoryFactory);
-
+	.factory('UsersRepository', UsersRepositoryFactory);
+	//ngInject
 	function UsersRepositoryFactory(dbc){
 		var obj = {};
 

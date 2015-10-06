@@ -4,8 +4,8 @@
 	angular.module('Loft.Users.Repository',[
 		'Loft.Fire'
 		])
-	.factory('UsersRepository',UsersRepositoryFactory);
-
+	.factory('UsersRepository', UsersRepositoryFactory);
+	//ngInject
 	function UsersRepositoryFactory(dbc){
 		var obj = {};
 

@@ -1,7 +1,7 @@
 ;(function(){
 	'use strict';
 
-	angular.module('Loft.Fire',[
+	angular.module('Loft.Fire', [
 		'firebase'
 		])
 	.factory('dbc', dbcFactory);
@@ -13,9 +13,9 @@
 
 		obj.getRef = function(){
 			return reefrence;
-		}
+		};
 
 		return obj;
 
-	}
-})
+	}//end of factory
+})();
