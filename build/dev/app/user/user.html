@@ -1,3 +1,39 @@
 <h1>User</h1>
+<div class="panel">
+	<form class="form-inline" name="newUserForm" ng-submit="uc.addUser()" novalidate>
+	  <div class="form-group" ng-class="{'has-error': newUserForm.$invalid && newUserForm.$dirty}">
+	  						  
+	    <label class="sr-only" for="newUserName">Name</label>
+	    <input type="text" class="form-control" id="newUserName" placeholder="Name" ng-model="uc.newUser.name" required>
+	  </div>
+	  <div class="form-group">
+	    <label class="sr-only" for="newUserPassword">Surname</label>
+	    <input type="text" class="form-control" id="newUserSurname" placeholder="Surname" ng-model="uc.newUser.surname" required>
+	  </div>
+	  
+	  <button type="submit" class="btn btn-default" ng-disabled="newUserForm.$invalid">Add User</button>
+	  <span>{{newUserForm.$invalid||newUserForm.$dirty}}</span>
+	</form>
+</div>
+<div class="panel">
+	<!--<pre>{{newUserForm | json }}</pre>-->
+	<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+</div>
 <button ng-click="uc.promiseTest()">Promise Test</button>
-<pre>{{uc}}</pre>
+<!--<pre>{{uc | json}}</pre>-->
+<table class="table">
+		<tr>
+			<th># User </th>
+			<th>User Name</th>
+			<th>User Surname</th>
+			<th>Remove</th>
+		</tr>
+		<tr ng-repeat="user in uc.list">
+			<td>{{$index+1}}</td>
+			<td>{{user.name}}</td>
+			<td>{{user.surname}}</td>
+			<td><span class="glyphicon glyphicon-remove cursor" aria-hidden="true" ng-click="uc.removeUser(user.$id)"></span></td>
+		</tr>
+
+	</table>
+<pre>{{uc.list | json}}</pre>

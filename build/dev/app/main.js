@@ -20,9 +20,9 @@
 					'ui.router',
 					'Loft.Users',
 					'Loft.User',
+					'Loft.Auth',
 					'ui.bootstrap',
-					'Loft.Home',
-					'Loft.Fire'
+					'Loft.Home'
 					])
 					.config(Config)
 					.run(Run)
@@ -45,10 +45,19 @@ function Config($urlRouterProvider){
 		.otherwise('/')
 	}
 
-function Run(FIREBASE_URL, configOptions){
+function Run(FIREBASE_URL, configOptions, $rootScope){
 	console.log('Run Main');
 	console.log(FIREBASE_URL);
 	console.log(configOptions);
+	$rootScope.alerts = [ ];
+	$rootScope.addAlert = function(_type, _msg) {
+		_type = _type || 'warning';
+    	$rootScope.alerts.push({type: _type, msg: _msg});
+  };
+
+  $rootScope.closeAlert = function(index) {
+    $rootScope.alerts.splice(index, 1);
+  };
 }
 
 })();

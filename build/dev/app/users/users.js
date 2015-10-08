@@ -2964,6 +2964,7 @@
 			//console.log(curString);
 			return curString;
 		}
+		/*
 		function RubleFilter(){
 			return function(input){
 				
@@ -2975,6 +2976,12 @@
 				});
 				return input;
 				
+			}
+		}
+		*/
+		function RubleFilter(){
+			return function(input){
+				return String(Math.floor(input * 100)/100).replace(/(\d)(?=(\d{3})+\.)/g, '$1 ') + ' руб.';
 			}
 		}
 		//ngInject

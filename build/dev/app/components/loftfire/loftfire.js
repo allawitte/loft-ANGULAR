@@ -12,8 +12,10 @@
 		var reference = new Firebase(FIREBASE_URL);
 
 		obj.getRef = function(){
-			return reefrence;
+			return reference;
 		};
+
+		
 
 		return obj;
 

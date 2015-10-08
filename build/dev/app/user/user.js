@@ -29,7 +29,7 @@
 
 	 }
 	//ngInject
-	function userController($scope, $q, UsersRepository){
+	function userController($scope, $q, UsersRepository, $rootScope){
 		console.log('=================   UserController =================');
 		//Mother
 		var self = this;
@@ -95,6 +95,34 @@
 		}//end of promiseTest
 
 		/*================   firebase part  ===================*/
+
+		self.newUser = {
+			name : "",
+			surname : ""
+		}
+
+		self.addUser = function(){
+			console.log("=============  addUser Controller  =============");
+			UsersRepository
+			.addNewUser(self.newUser)
+			.then(function(ref){
+				$rootScope.addAlert('success', 'User was saved succesfully in DB');
+			});
+			self.newUser = {
+				name : "",
+				surname : ""
+			};
+		}//end of addUser
+
+		self.removeUser = function(_$id){
+			UsersRepository
+			.removeUser(_$id)
+			.then(function(){
+				$rootScope.addAlert('success', 'User was remover succesfully from DB');
+			});
+
+		}//end of removeUser
+
 		var users = UsersRepository.getAllUsers();
 		users.$loaded(function(_userslist){
 		//здесь происходит обработка промиса $loaded
@@ -102,10 +130,12 @@
 			self.list = _userslist;
 			
 		});//end of $loaded
-
+/*
 		users.$watch(function(_userslist){
 			self.list = _userslist;
-		});
+		});//end of watch
+
+*/
 	}//end of controller
 
 })();

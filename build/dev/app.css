@@ -11,3 +11,6 @@ body {
 .eye-brown {
   background-color: #5A2704;
   color: #fff; }
+
+.cursor {
+  cursor: pointer; }
