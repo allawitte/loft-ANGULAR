@@ -22,7 +22,8 @@
 					'Loft.User',
 					'Loft.Auth',
 					'ui.bootstrap',
-					'Loft.Home'
+					'Loft.Home',
+					'Loft.Navbar'
 					])
 					.config(Config)
 					.run(Run)

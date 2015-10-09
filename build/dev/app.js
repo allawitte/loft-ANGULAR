@@ -22,7 +22,8 @@
 					'Loft.User',
 					'Loft.Auth',
 					'ui.bootstrap',
-					'Loft.Home'
+					'Loft.Home',
+					'Loft.Navbar'
 					])
 					.config(Config)
 					.run(Run)
@@ -73,8 +74,39 @@ function Run(FIREBASE_URL, configOptions, $rootScope){
 		.controller('HomeCtrl',homeController);
 	
  	//ngInject
-	function homeController($scope){
+	function homeController($scope, Authification){
+
+		var self = this;
+		self.createUser = {
+			email : "",
+			password : ""
+		};
+		Authification.getAuth();
+		//Authification.onAuth();
+
+		self.addUser = function(_user){
+			Authification.createUser(_user);
+		}
 		
+
+		self.loginUser = function(_user){
+			Authification.authObj(_user)
+			.then(function(authData) {
+				  console.log("Logged in as:", authData.uid);
+				  self.userLogin = "Logged in as:"+ authData.uid;
+				  self.error = false;
+				  Authification.getAuth();
+				}).catch(function(error) {
+					self.userLogin = "Authentication failed:"+ error;
+				  console.error("Authentication failed:", error);
+				  self.error = true;
+				  Authification.getAuth();
+			});
+		}
+
+		//Authification.getAuth();
+		//Authification.onAuth();
+		//Authification.createUser();
 	}
 /*
 	function UsersConfig($routeProvider){
@@ -99,6 +131,23 @@ function HomeConfig($stateProvider){
 	}
 })();
 
+;(function(){
+	'use strict';
+	angular.module('Loft.Navbar',[
+		])
+	.controller('NavbarCtrl', navbarController);
+	//ngInject
+	function navbarController(Authification){
+		console.log("===== NavbarCtrl ======");
+		var self = this;
+		self.logOut = function(){
+			console.log("====  Logout  =====");
+			Authification.onAuth();
+			Authification.getAuth();
+		}
+
+	}
+})();	
 ;(function(){
 	'use strict';
 	angular.module('Loft.User',[
@@ -3389,7 +3438,70 @@ function UsersConfig($provide, $stateProvider, $logProvider, UsersProvProvider){
 
 	}//end of factory
 })();
+;(function(){
+	'use strict';
+//registration part
+	angular.module('Loft.Auth', [
+		'Loft.Fire'
+		])
+	.factory('Authification', AuthificationFactory);
+//ngInject
+	function  AuthificationFactory(dbc, $firebaseAuth, $rootScope){
+		var obj = {};
 
+		var auth = $firebaseAuth(dbc.getRef());
+
+		obj.authObj = function(_user){
+			console.log('====  authObj  ====');
+			return auth.$authWithPassword(_user);
+		};
+
+		obj.getAuth = function(){
+			console.log('====  getAuth  ====');
+			var authData = auth.$getAuth();
+			if (authData) {
+				 $rootScope.isUserLogged = true;
+				  console.log("Logged in as:", authData.uid);
+				} else {
+				  $rootScope.isUserLogged = false;
+				  console.log("Logged out");
+			}
+			//endif
+		}//end of getAuth
+
+		obj.onAuth = function(){
+			console.log('====  onAuth  ====');
+			auth.$onAuth(function(authData) {
+			  if (authData) {
+			    console.log("Logged in as:", authData.uid);
+			    auth.$unauth();
+			  } else {
+			    console.log("Logged out");
+			  }
+			  obj.getAuth();
+			});
+		}//end of onAuth
+
+		obj.createUser = function(newUser){
+			console.log('====  createUser  ====');
+			auth.$createUser(newUser)
+			.then(function(userData) {
+			  console.log("User " + userData.uid + " created successfully!");
+	  
+			  return auth.$authWithPassword(newUser); 
+			  }).then(function(authData) {
+			    console.log("Logged in as:", authData.uid);
+			  }).catch(function(error) {
+			    console.error("Error: ", error);
+			  });
+			
+		}//end of createUser
+
+		return obj;
+
+		
+	}//end of factory
+})();
 ;(function(){
 	'use strict';
 
