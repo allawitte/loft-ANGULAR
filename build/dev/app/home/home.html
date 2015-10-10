@@ -1,5 +1,5 @@
 <h1>Home</h1>
-<div class="panel" ng-view="home.userLogin">
+<div class="panel" ng-if="home.userLogin">
 	<div class="alert" ng-class="{'alert-success': !home.error, 'alert-danger':home.error}">
 		{{home.userLogin}}
 	</div>
@@ -46,18 +46,22 @@
 		  		type="submit"
 		  		class="btn btn-default"
 		  		ng-click="home.createUser(home.createUser)" 
+		  		ng-if="createUse"
 		  		ng-disabled="createUserForm.$invalid">
 		  		Create User
 		  </button>
+		  <a href="" ng-if="!createUse" ng-click="home.changeType(createUse)">New user</a>
+		  <a href="" ng-if="createUse" ng-click="home.changeType(createUse)">Existing user</a>
 		  <button 
 		  		type="submit"
 		  		class="btn btn-default"
 		  		ng-click="home.loginUser(home.createUser)" 
+		  		ng-if="!createUse"
 		  		ng-disabled="createUserForm.$invalid">
 		  		Login User
 		  </button>
 		  <span>{{createUserForm.$invalid||createUserForm.$dirty}}</span>
 		  <div class="error" ng-show="createUser.$invalid">{{home.errorMessage}}</div>
-		  <pre>{{isUserLogged}}</pre>
+		  <pre>CreateUse &nbsp;{{createUse}}</pre>
 	</form>
 </div>

@@ -16,13 +16,19 @@
 			email : "",
 			password : ""
 		};
+		$scope.createUse = true;
+		self.userLogin = false;
 		Authification.getAuth();
 		//Authification.onAuth();
 
 		self.addUser = function(_user){
 			Authification.createUser(_user);
 		}
-		
+
+		self.changeType = function(_input){
+			console.log("==== change type =====");
+			$scope.createUse = !(_input);
+		}
 
 		self.loginUser = function(_user){
 			Authification.authObj(_user)
