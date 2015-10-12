@@ -30,7 +30,6 @@ gulp.task('js', function(){
 			'!build/dev/app/**/*_test.js',
 			])
 		.pipe(concat('app.js'))
-		
 		.pipe(gulp.dest('build/dev'));
 });
 
@@ -44,8 +43,7 @@ gulp.task('app', function(){
 			'build/dev/app/**/*.js',
 			'!build/dev/app/**/*_test.js',
 			])
-		.pipe(concat('app.js'))
-		
+		.pipe(concat('app.js'))		
 		.pipe(gulp.dest('build/dev'));
 });
 
@@ -53,11 +51,6 @@ gulp.task('css',function(){
 	gulp.src([
 		'bower_components/bootstrap/dist/css/bootstrap.css',
 		'bower_components/bootstrap/dist/css/bootstrap-theme.css',
-		'bower_components/bootstrap/fonts/glyphicons-halflings-regular.eot',
-		'bower_components/bootstrap/fonts/glyphicons-halflings-regular.svg',
-		'bower_components/bootstrap/fonts/glyphicons-halflings-regular.ttf',
-		'bower_components/bootstrap/fonts/glyphicons-halflings-regular.woff',
-		'bower_components/bootstrap/fonts/glyphicons-halflings-regular.woff2',
 		'bower_components/angular-bootstrap/ui-bootstrap-csp.css',
 		'bower_components/angular/angular-csp.css'
 		])
@@ -123,11 +116,6 @@ gulp.task('pcss',function(){
 		'bower_components/bootstrap/dist/css/bootstrap.min.css',
 		'bower_components/bootstrap/dist/css/bootstrap-theme.min.css',
 		'bower_components/angular-bootstrap/ui-bootstrap-csp.min.css',
-		'bower_components/bootstrap/fonts/glyphicons-halflings-regular.eot',
-		'bower_components/bootstrap/fonts/glyphicons-halflings-regular.svg',
-		'bower_components/bootstrap/fonts/glyphicons-halflings-regular.ttf',
-		'bower_components/bootstrap/fonts/glyphicons-halflings-regular.woff',
-		'bower_components/bootstrap/fonts/glyphicons-halflings-regular.woff2',
 		'bower_components/angular/angular-csp.min.css'
 		])
 		.pipe(concat('theme.css'))
@@ -166,14 +154,14 @@ gulp.task('default', [
 	'js',
 	'css',
 	//'app',
-	'webserver',
-	'watch'
+	'watch',
+	'webserver'
 	]);
 
 gulp.task('prod',[
 	'pjs',
 	'pcss',
 	'html',
+	'pwatch',
 	'pwebserver',
-	'pwatch'
 	])

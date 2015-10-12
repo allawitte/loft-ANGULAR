@@ -4,12 +4,14 @@
 	angular.module('Loft.Auth', [
 		'Loft.Fire'
 		])
-	.factory('Authification', AuthificationFactory);
+	.factory('Authentication', AuthenticationFactory);
 //ngInject
-	function  AuthificationFactory(dbc, $firebaseAuth, $rootScope){
+	function  AuthenticationFactory(dbc, $firebaseAuth, $rootScope){
 		var obj = {};
 
-		var auth = $firebaseAuth(dbc.getRef());
+		var ref = dbc.getRef();
+		var auth = $firebaseAuth(ref);
+		var usersRef = ref.child('users');
 
 		obj.authObj = function(_user){
 			console.log('====  authObj  ====');
@@ -18,14 +20,14 @@
 
 		obj.getAuth = function(){
 			console.log('====  getAuth  ====');
-			var authData = auth.$getAuth();
-			if (authData) {
-				 $rootScope.isUserLogged = true;
+			//var authData = auth.$getAuth();
+			/*if (authData) {
+				 
 				  console.log("Logged in as:", authData.uid);
 				} else {
-				  $rootScope.isUserLogged = false;
+				  
 				  console.log("Logged out");
-			}
+			}*/
 			//endif
 		}//end of getAuth
 
@@ -34,29 +36,52 @@
 			auth.$onAuth(function(authData) {
 			  if (authData) {
 			    console.log("Logged in as:", authData.uid);
-			    auth.$unauth();
+			    $rootScope.isUserLogged = true;
+			    
 			  } else {
-			    console.log("Logged out");
+			  	$rootScope.isUserLogged = false;
+			    console.log("Not logged in");
+			    
 			  }
-			  obj.getAuth();
+			 // obj.getAuth();
 			});
 		}//end of onAuth
 
-		obj.createUser = function(newUser){
+		obj.logoff = function(){
+			console.log("Logged out");
+			$rootScope.isUserLogged = false;
+			auth.$unauth();
+		}
+
+		obj.onAuth();
+
+
+	obj.createUser = function(newUser){
 			console.log('====  createUser  ====');
-			auth.$createUser(newUser)
+			console.log(newUser);
+			return auth.$createUser({
+				'email' : newUser.email,
+				'password' : newUser.password
+			})
 			.then(function(userData) {
 			  console.log("User " + userData.uid + " created successfully!");
-	  
-			  return auth.$authWithPassword(newUser); 
-			  }).then(function(authData) {
-			    console.log("Logged in as:", authData.uid);
-			  }).catch(function(error) {
-			    console.error("Error: ", error);
-			  });
-			
+	  		usersRef.child(userData.uid)
+	  		.set({
+	  			fullname: newUser.fullname || 'Dear Friend',
+	  			email: newUser.email,
+	  			date: Firebase.ServerValue.TIMESTAMP
+	  		});
+			  return auth.$authWithPassword({
+						'email' : newUser.email,
+						'password' : newUser.password
+					});
+		  })
+			.then(function(authData) {
+		    console.log("Logged in as:", authData.uid);
+		  }).catch(function(error) {
+		    console.error("Error: ", error);
+		  }); 
 		}//end of createUser
-
 		return obj;
 
 		

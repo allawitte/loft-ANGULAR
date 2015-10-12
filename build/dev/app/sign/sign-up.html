@@ -1,0 +1,72 @@
+<div class="content">
+	<div class="row">
+		<h1>Sign Up</h1>
+		<div class="panel" ng-if="!isUserLogged">
+	<form 
+		class="form" 
+		name="signUp" 
+		novalidate>
+			<div 
+					class="form-group" 
+					ng-class="{'has-error': signUp.fname.$invalid && signUp.fname.$touched}">
+									  
+			  <label 
+			  	class="sr-only" 
+			  	for="signUpFullname">Fullname
+			  </label>
+			  <input 
+			  	type="text" 
+			  	class="form-control" 
+			  	id="signUpFullname" 
+			  	placeholder="Fullname" 
+			  	ng-model="suc.user.fullname" 
+			  	name="fname"
+			  	required>
+			</div>
+		  <div 
+		  		class="form-group" 
+		  		ng-class="{'has-error': signUp.email.$invalid && signUp.email.$touched}">
+		  						  
+		    <label 
+		    	class="sr-only" 
+		    	for="signUpName">e-mail
+		    </label>
+		    <input 
+		    	type="email" 
+		    	class="form-control" 
+		    	id="signUpEmail" 
+		    	placeholder="email" 
+		    	ng-model="suc.user.email" 
+		    	name="email"
+		    	required>
+		  </div>
+		  
+		  <div class="form-group">
+		    <label 
+		    	class="sr-only" 
+		    	for="signUpPassword">Password
+		    </label>
+		    <input 
+		    	type="password" 
+		    	class="form-control" 
+		    	id="signUpPassword" 
+		    	placeholder="password" 
+		    	ng-model="suc.user.password" 
+		    	name="password"
+		    	required>
+		  </div>
+		  
+		  <button 
+		  		type="submit"
+		  		class="btn btn-default"
+		  		ng-click="suc.signUp(suc.user)" 
+		  		ng-disabled="signUp.$invalid">
+		  		Sign Up
+		  </button>
+		  
+		  <div class="error" ng-show="signUp.$invalid">{{suc.errorMessage}}</div>
+		  <!--<pre>signUp &nbsp;{{signUp | json}}</pre>-->
+	</form>
+</div>
+	</div>
+</div>

@@ -23,7 +23,8 @@
 					'Loft.Auth',
 					'ui.bootstrap',
 					'Loft.Home',
-					'Loft.Navbar'
+					'Loft.Navbar',
+					'Loft.Sign'
 					])
 					.config(Config)
 					.run(Run)

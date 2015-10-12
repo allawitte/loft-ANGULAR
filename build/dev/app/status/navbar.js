@@ -4,13 +4,12 @@
 		])
 	.controller('NavbarCtrl', navbarController);
 	//ngInject
-	function navbarController(Authification){
+	function navbarController(Authentication){
 		console.log("===== NavbarCtrl ======");
 		var self = this;
 		self.logOut = function(){
 			console.log("====  Logout  =====");
-			Authification.onAuth();
-			Authification.getAuth();
+			Authentication.logoff();			
 		}
 
 	}

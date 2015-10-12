@@ -24,7 +24,8 @@
 					'ui.bootstrap',
 					'Loft.Home',
 					'Loft.Navbar',
-					'Loft.Sign'
+					'Loft.Sign',
+					'Loft.Profile',
 					])
 					.config(Config)
 					.run(Run)
@@ -51,10 +52,13 @@ function Run(FIREBASE_URL, configOptions, $rootScope){
 	console.log('Run Main');
 	console.log(FIREBASE_URL);
 	console.log(configOptions);
-	$rootScope.alerts = [ ];
-	$rootScope.addAlert = function(_type, _msg) {
+	$rootScope.alerts = [];
+	$rootScope.currentUser = {
+		fullname: null
+	};
+	$rootScope.addAlert = function(_msg, _type) {
 		_type = _type || 'warning';
-    	$rootScope.alerts.push({type: _type, msg: _msg});
+    $rootScope.alerts.push({type: _type, msg: _msg});
   };
 
   $rootScope.closeAlert = function(index) {
@@ -89,7 +93,6 @@ function Run(FIREBASE_URL, configOptions, $rootScope){
 
 		self.addUser = function(_user){
 			Authentication.createUser(_user);
-			$state.go('users');
 		}
 
 		self.changeType = function(_input){
@@ -103,8 +106,8 @@ function Run(FIREBASE_URL, configOptions, $rootScope){
 				  console.log("Logged in as:", authData.uid);
 				  self.userLogin = "Logged in as:"+ authData.uid;
 				  self.error = false;
-				  //Authentication.getAuth();
 				  $state.go('users');
+				  // Authentication.getAuth();
 				}).catch(function(error) {
 					self.userLogin = "Authentication failed:"+ error;
 				  console.error("Authentication failed:", error);
@@ -141,87 +144,188 @@ function HomeConfig($stateProvider){
 })();
 
 ;(function(){
-	'use strict';
-	angular.module('Loft.Sign',[
-		'Loft.Auth'
-		])
-	.controller('SignInCtrl', SignInController)
-	.controller('SignUpCtrl', SignUpController)
-	.config(SignUpConfig)
-	
-	/*
-	*** SignUp  Controller
-	*/
-	//ngInject
-	function SignUpController(Authentication, $state, $rootScope){
-		var self = this;
+  'use strict';
 
-		function clean(){
-			self.user = {
-				email : null,
-				password : null,
-				fullname : null
-			};
-		};
+  angular.module('Loft.Profile', [
+    'Loft.Fire',
+    'Loft.Auth',
+  ])
+  .controller('ProfileCtrl', ProfileController)
+  .factory('Profile', ProfileFactory)
+  .config(ProfileConfig)
 
-		clean();
+  // @ngInject
+  function ProfileFactory(dbc, $firebaseObject){
+    var o = {};
 
-		self.signUp = function(){
-		    Authentication
-	        .createUser(self.user)
-	        .then(function(e){
-	          clean();
-	          $state.go('home');
-	        });
-	    
-		};
+    var ref = dbc.getRef();
+    var usersRef = ref.child('users');
+
+    o.getUser = function (_id) {
+      return $firebaseObject(usersRef.child(_id)).$loaded();
+    }
+
+    return o;
+  }
 
 
-	}//end of SignUpController
-	/*
-	*** SignIn  Controller
-	*/
-	//ngInject
-	function SignInController(Authentication, $state, $rootScope){
-		var self = this;
+  /**
+   * Profile Controller
+   */
+  // @ngInject
+  function ProfileController($stateParams, Profile)
+  {
+    var s = this;
+    s.id = $stateParams.id;
 
-		function clean(){
-			self.user = {
-				email : null,
-				password : null				
-			};
-		};
+    Profile
+      .getUser($stateParams.id)
+      .then(function(_user){
+        s.user = _user;
+      });
+    
+  }
 
-		clean();
+  function ProfileConfig ($stateProvider) {
+    $stateProvider
+      .state('profile', {
+        resolve: {
+          auth: /*@ngInject*/ function(Authentication){
+            return Authentication.requireAuth();
+          }
+        },
+        url: '/profile/:id?getParams1&getParam2',
+        templateUrl : 'app/profile/profile.html', 
+        controller : 'ProfileCtrl',
+        controllerAs : 'pc'
+      });
+  }
+  
+})();
 
-		self.signIn = function(){
-			Authentication
-	        .login(self.user)
-	        .then(function(e){
-	          clean();
-	          $state.go('home');
-	        });
-		};
-	}//end of SignInController
+;(function(){
+  'use strict';
 
-	//ngInject
-	function SignUpConfig($stateProvider){
-		$stateProvider
-		.state('signin',{
-			url: '/signin',
-			templateUrl : 'app/sign/sign-in.html',
-			controller : 'SignInCtrl',
-			controllerAs : 'sic'
-		})
-		.state('signup',{
-			url: '/signup',
-			templateUrl : 'app/sign/sign-up.html',
-			controller : 'SignUpCtrl',
-			controllerAs : 'suc'
-		});
-	}
-	
-})();	
+  angular.module('Loft.Sign', [
+      'Loft.Auth',
+      'ui.router',
+    ])
+  .controller('SignInCtrl', SignInController)
+  .controller('SignUpCtrl', SignUpController)
+  .config(SignUpConfig)
+
+  /**
+   * SignUp Controller
+   */
+  // @ngInject
+  function SignUpController(Authentication, $state)
+  {
+    var s = this;
+    
+    function clean(){
+      s.user = {
+        'email': null,
+        'password': null,
+        'fullname': null
+      };      
+    };
+
+    clean();
+
+    s.facebookSignUp = function(){
+      Authentication
+        .facebookSignUp()
+        .then(function(e){
+          $state.go('home');
+        })
+    }
+
+    s.signUp = function(){
+      Authentication
+        .createUser(s.user)
+        .then(function(e){
+          clean();
+          $state.go('home');
+        });
+    }
+  
+  }
+
+  /**
+   * SignIn Controller
+   */
+  // @ngInject
+  function SignInController(Authentication, $state, $rootScope)
+  {
+    var s = this;
+    
+    function clean(){
+      s.user = {
+        'email': null,
+        'password': null,
+      };      
+    };
+
+    clean();
+
+    s.facebookSignIn = function(){
+      Authentication
+        .facebookSignIn()
+        .then(function(e){
+          $state.go('home');
+        })
+    }
+
+    s.signIn = function(){
+      Authentication
+        .login(s.user)
+        .then(function(e){
+          clean();
+          $state.go('home');
+        })
+        .catch(function(error){
+          switch (error.code) {
+            case "INVALID_EMAIL":
+              $rootScope.addAlert('The specified user account email is invalid.');
+              console.log("The specified user account email is invalid.");
+              break;
+            case "INVALID_PASSWORD":
+              console.log("The specified user account password is incorrect.");
+              break;
+            case "INVALID_USER":
+              $rootScope.addAlert('The specified user account does not exist.');
+              console.log("The specified user account does not exist.");
+              break;
+            default:
+              $rootScope.addAlert('Error logging user in');
+              console.log("Error logging user in:", error);
+          }
+        });
+    }
+  
+  }
+  
+
+  function SignUpConfig($stateProvider)
+  {
+    $stateProvider
+    .state('signin',{
+      url: '/signin',
+      templateUrl: 'app/sign/sign-in.html',
+      controller: 'SignInCtrl',
+      controllerAs: 'sic'
+    })
+    .state('signup',{
+      url: '/signup',
+      templateUrl: 'app/sign/sign-up.html',
+      controller: 'SignUpCtrl',
+      controllerAs: 'suc'
+    })
+
+  }
+  
+})();
+
 ;(function(){
 	'use strict';
 	angular.module('Loft.Navbar',[
@@ -233,7 +337,9 @@ function HomeConfig($stateProvider){
 		var self = this;
 		self.logOut = function(){
 			console.log("====  Logout  =====");
-			Authentication.logoff();			
+			// Authentication.onAuth();
+			// Authentication.getAuth();
+			Authentication.logout();
 		}
 
 	}
@@ -386,7 +492,7 @@ function HomeConfig($stateProvider){
 		'ui.router',
 		'ui.bootstrap'
 		])
-		.constant('FIREBASE_URL', "http://awfitness.firebaseio.com")
+		.constant('FIREBASE_URL', "https://ngloft.firebaseio.com/")
 		.value('configOptions',{
 			lang: 'ru',
 			timezone: '-3'
@@ -3522,13 +3628,10 @@ function UsersConfig($provide, $stateProvider, $logProvider, UsersProvProvider){
 			return reference;
 		};
 
-		
-
 		return obj;
 
 	}//end of factory
 })();
-
 ;(function(){
 	'use strict';
 //registration part
@@ -3537,7 +3640,7 @@ function UsersConfig($provide, $stateProvider, $logProvider, UsersProvProvider){
 		])
 	.factory('Authentication', AuthenticationFactory);
 //ngInject
-	function  AuthenticationFactory(dbc, $firebaseAuth, $rootScope){
+	function  AuthenticationFactory(dbc, $firebaseAuth, $rootScope, $firebaseObject){
 		var obj = {};
 
 		var ref = dbc.getRef();
@@ -3550,15 +3653,13 @@ function UsersConfig($provide, $stateProvider, $logProvider, UsersProvProvider){
 		};
 
 		obj.getAuth = function(){
-			console.log('====  getAuth  ====');
-			//var authData = auth.$getAuth();
-			/*if (authData) {
-				 
-				  console.log("Logged in as:", authData.uid);
-				} else {
-				  
-				  console.log("Logged out");
-			}*/
+			// console.log('====  getAuth  ====');
+			// var authData = auth.$getAuth();
+			// if (authData) {
+			// 	  console.log("Logged in as:", authData.uid);
+			// 	} else {
+			// 	  console.log("Logged out");
+			// }
 			//endif
 		}//end of getAuth
 
@@ -3566,38 +3667,44 @@ function UsersConfig($provide, $stateProvider, $logProvider, UsersProvProvider){
 			console.log('====  onAuth  ====');
 			auth.$onAuth(function(authData) {
 			  if (authData) {
+				  $rootScope.isUserLogged = true;
+				  var user = $firebaseObject(usersRef.child(authData.uid));
+				  user.$loaded(function(_user){
+						$rootScope.currentUser.fullname = _user.fullname;
+						$rootScope.currentUser.id = _user.$id;
+				  });
 			    console.log("Logged in as:", authData.uid);
-			    $rootScope.isUserLogged = true;
-			    
 			  } else {
-			  	$rootScope.isUserLogged = false;
+				  $rootScope.isUserLogged = false;
+				  $rootScope.currentUser.fullname = null;
+					$rootScope.currentUser.id = null;
 			    console.log("Not logged in");
-			    
+			    // auth.$unauth();
 			  }
-			 // obj.getAuth();
+			  // obj.getAuth();
 			});
 		}//end of onAuth
 
-		obj.logoff = function(){
-			console.log("Logged out");
-			$rootScope.isUserLogged = false;
-			auth.$unauth();
-		}
-
 		obj.onAuth();
 
+		obj.require = function(){
+			return auth.$requireAuth();
+		}
 
-	obj.createUser = function(newUser){
+		obj.login = function(_user){
+			return auth.$authWithPassword(_user);
+		}
+
+		obj.createUser = function(newUser){
 			console.log('====  createUser  ====');
-			console.log(newUser);
+
 			return auth.$createUser({
 				'email' : newUser.email,
 				'password' : newUser.password
 			})
 			.then(function(userData) {
 			  console.log("User " + userData.uid + " created successfully!");
-	  		usersRef.child(userData.uid)
-	  		.set({
+	  		usersRef.child(userData.uid).set({
 	  			fullname: newUser.fullname || 'Dear Friend',
 	  			email: newUser.email,
 	  			date: Firebase.ServerValue.TIMESTAMP
@@ -3606,13 +3713,38 @@ function UsersConfig($provide, $stateProvider, $logProvider, UsersProvProvider){
 						'email' : newUser.email,
 						'password' : newUser.password
 					});
-		  })
-			.then(function(authData) {
+		  }).then(function(authData) {
 		    console.log("Logged in as:", authData.uid);
 		  }).catch(function(error) {
 		    console.error("Error: ", error);
-		  }); 
+		  });
 		}//end of createUser
+
+		obj.logout = function(){
+			auth.$unauth();
+		}
+
+		obj.facebookSignIn = function(){
+			return auth.$authWithOAuthPopup("facebook")
+				.then(function(authData){
+					console.log('Facebook sign in ', authData);
+				})
+		}
+
+		obj.facebookSignUp = function(){
+			return auth.$authWithOAuthPopup("facebook")
+				.then(function(authData){
+					console.log('Facebook sign up ', authData);
+					usersRef.child(authData.uid).set({
+		  			fullname: authData.facebook.displayName,
+		  			email: null,
+		  			facebookId: authData.facebook.id,
+		  			avatar: authData.facebook.profileImageURL,
+		  			date: Firebase.ServerValue.TIMESTAMP
+		  		});
+				})
+		}
+
 		return obj;
 
 		
