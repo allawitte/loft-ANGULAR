@@ -6,7 +6,7 @@
 		])
 	.factory('Authentication', AuthenticationFactory);
 //ngInject
-	function  AuthenticationFactory(dbc, $firebaseAuth, $rootScope){
+	function  AuthenticationFactory(dbc, $firebaseAuth, $rootScope, $firebaseObject){
 		var obj = {};
 
 		var ref = dbc.getRef();
@@ -17,6 +17,11 @@
 			console.log('====  authObj  ====');
 			return auth.$authWithPassword(_user);
 		};
+		obj.login = function(_user){
+			console.log('====  Login Existing User  ====');
+			console.log(_user);
+			return auth.$authWithPassword(_user);
+		}
 
 		obj.getAuth = function(){
 			console.log('====  getAuth  ====');
@@ -33,13 +38,20 @@
 
 		obj.onAuth = function(){
 			console.log('====  onAuth  ====');
+
 			auth.$onAuth(function(authData) {
 			  if (authData) {
 			    console.log("Logged in as:", authData.uid);
+			    var user = $firebaseObject(usersRef.child(authData.uid));
+			    user.$loaded(function(_user){
+			    	$rootScope.currentUser.fullname = _user.fullname;
+			    })
+			    
 			    $rootScope.isUserLogged = true;
 			    
 			  } else {
 			  	$rootScope.isUserLogged = false;
+			  	$rootScope.currentUser.fullname = null;
 			    console.log("Not logged in");
 			    
 			  }
@@ -82,8 +94,36 @@
 		    console.error("Error: ", error);
 		  }); 
 		}//end of createUser
+
+		obj.facebookSignIn = function(){
+			console.log("facebookSignIn");
+			return auth.$authWithOAuthPopup("facebook").then(function(authData) {
+					  console.log("Facebook Sign In:", authData.uid);
+					}).catch(function(error) {
+					  console.error("Authentication failed:", error);
+					});
+		}
+
+		obj.facebookSignUp = function(){
+			console.log("facebookSignUp");
+			return auth.$authWithOAuthPopup("facebook")
+			.then(function(authData) {
+				usersRef.child(authData.uid)
+			  		.set({
+			  			fullname: authData.facebook.displayName,
+			  			email: null,
+			  			facebookId: authData.facebook.id,
+			  			avatar: authData.facebook.profileImageURL,
+			  			date: Firebase.ServerValue.TIMESTAMP
+			  		});
+					  console.log("Facebook Sign Up:", authData.uid);
+					}).catch(function(error) {
+					  console.error("Authentication failed:", error);
+					});
+		}
+
 		return obj;
 
 		
-	}//end of factory
+	}//end of factory  https://auth.firebase.com/v2/awfitness/auth/facebook/callback
 })();

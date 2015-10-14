@@ -51,6 +51,9 @@ function Run(FIREBASE_URL, configOptions, $rootScope){
 	console.log('Run Main');
 	console.log(FIREBASE_URL);
 	console.log(configOptions);
+	$rootScope.currentUser = {
+		fullname : null
+	};
 	$rootScope.alerts = [ ];
 	$rootScope.addAlert = function(_type, _msg) {
 		_type = _type || 'warning';

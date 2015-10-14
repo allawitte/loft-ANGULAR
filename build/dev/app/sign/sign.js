@@ -24,6 +24,15 @@
 
 		clean();
 
+		self.facebookSignUp = function(){
+			console.log("facebookSignIn Loft.Sign");
+			Authentication
+			.facebookSignUp()
+			.then(function(e){
+				$state.go('home');
+			});
+		}
+
 		self.signUp = function(){
 		    Authentication
 	        .createUser(self.user)
@@ -51,6 +60,15 @@
 		};
 
 		clean();
+
+		self.facebookSignIn = function(){
+			console.log("facebookSignUp Loft.Sign");
+			Authentication
+			.facebookSignIn()
+			.then(function(e){
+				$state.go('home');
+			});
+		}
 
 		self.signIn = function(){
 			Authentication

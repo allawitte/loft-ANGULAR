@@ -63,10 +63,16 @@
 		  		ng-disabled="signUp.$invalid">
 		  		Sign Up
 		  </button>
+		  <button 
+		  		type="submit"
+		  		class="btn btn-primary"
+		  		ng-click="suc.facebookSignUp()">
+		  		SignUp with Facebook
+		  </button>
 		  
 		  <div class="error" ng-show="signUp.$invalid">{{suc.errorMessage}}</div>
 		  <!--<pre>signUp &nbsp;{{signUp | json}}</pre>-->
 	</form>
 </div>
-	</div>
+</div>
 </div>

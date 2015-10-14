@@ -19,7 +19,7 @@
 		    	class="form-control" 
 		    	id="signInEmail" 
 		    	placeholder="email" 
-		    	ng-model="sic.signIn.email" 
+		    	ng-model="sic.user.email" 
 		    	name="email"
 		    	required>
 		  </div>
@@ -34,7 +34,7 @@
 		    	class="form-control" 
 		    	id="signInPassword" 
 		    	placeholder="password" 
-		    	ng-model="sic.signIn.password" 
+		    	ng-model="sic.user.password" 
 		    	name="password"
 		    	required>
 		  </div>
@@ -45,6 +45,12 @@
 		  		ng-click="sic.signIn(sic.user)" 
 		  		ng-disabled="signInForm.$invalid">
 		  		Sign In
+		  </button>
+		  <button 
+		  		type="submit"
+		  		class="btn btn-primary"
+		  		ng-click="sic.facebookSignIn()">
+		  		Login with Facebook
 		  </button>
 		  <div class="error" ng-show="signIn.$invalid">{{sic.errorMessage}}</div>
 		  <!--<pre>signIn &nbsp;{{signIn | json}}</pre>-->
