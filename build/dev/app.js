@@ -24,7 +24,8 @@
 					'ui.bootstrap',
 					'Loft.Home',
 					'Loft.Navbar',
-					'Loft.Sign'
+					'Loft.Sign',
+					'Loft.Profile'
 					])
 					.config(Config)
 					.run(Run)
@@ -55,7 +56,7 @@ function Run(FIREBASE_URL, configOptions, $rootScope){
 		fullname : null
 	};
 	$rootScope.alerts = [ ];
-	$rootScope.addAlert = function(_type, _msg) {
+	$rootScope.addAlert = function(_msg, _type) {
 		_type = _type || 'warning';
     	$rootScope.alerts.push({type: _type, msg: _msg});
   };
@@ -145,6 +146,35 @@ function HomeConfig($stateProvider){
 
 ;(function(){
 	'use strict';
+	angular.module('Loft.Profile',[
+		])
+	.controller('ProfileCtrl', ProfileController)
+	.config(ProfileConfig);
+	
+	/*
+	*** Profile  Controller
+	*/
+	
+	
+	//ngInject
+	function ProfileController(){
+		var self = this;
+		
+	}
+
+	function ProfileConfig($stateProvider){
+		$stateProvider
+		.state('profile', {
+			url: '/profile/:id',
+			templateUrl : 'app/profile/profile.html',
+			controller : 'ProfileCtrl',
+			controllerAs : 'pc'
+		});
+	}
+})();
+	
+;(function(){
+	'use strict';
 	angular.module('Loft.Sign',[
 		'Loft.Auth'
 		])
@@ -221,7 +251,25 @@ function HomeConfig($stateProvider){
 	        .then(function(e){
 	          clean();
 	          $state.go('home');
-	        });
+	        })
+	        .catch(function(error){
+          switch (error.code) {
+            case "INVALID_EMAIL":
+              $rootScope.addAlert('The specified user account email is invalid.');
+              console.log("The specified user account email is invalid.");
+              break;
+            case "INVALID_PASSWORD":
+              console.log("The specified user account password is incorrect.");
+              break;
+            case "INVALID_USER":
+              $rootScope.addAlert('The specified user account does not exist.');
+              console.log("The specified user account does not exist.");
+              break;
+            default:
+              $rootScope.addAlert('Error logging user in');
+              console.log("Error logging user in:", error);
+          }
+        });
 		};
 	}//end of SignInController
 
@@ -3526,29 +3574,6 @@ function UsersConfig($provide, $stateProvider, $logProvider, UsersProvProvider){
 })();
 
 
-;(function(){
-	'use strict';
-
-	angular.module('Loft.Fire', [
-		'firebase'
-		])
-	.factory('dbc', dbcFactory);
-
-	function dbcFactory(FIREBASE_URL, $firebaseAuth){
-		var obj = {};
-
-		var reference = new Firebase(FIREBASE_URL);
-
-		obj.getRef = function(){
-			return reference;
-		};
-
-		
-
-		return obj;
-
-	}//end of factory
-})();
 
 ;(function(){
 	'use strict';
@@ -3597,6 +3622,7 @@ function UsersConfig($provide, $stateProvider, $logProvider, UsersProvProvider){
 			    var user = $firebaseObject(usersRef.child(authData.uid));
 			    user.$loaded(function(_user){
 			    	$rootScope.currentUser.fullname = _user.fullname;
+			    	$rootScope.currentUser.id = _user.$id;
 			    })
 			    
 			    $rootScope.isUserLogged = true;
@@ -3604,6 +3630,7 @@ function UsersConfig($provide, $stateProvider, $logProvider, UsersProvProvider){
 			  } else {
 			  	$rootScope.isUserLogged = false;
 			  	$rootScope.currentUser.fullname = null;
+			  	$rootScope.currentUser.id = null;
 			    console.log("Not logged in");
 			    
 			  }
@@ -3678,6 +3705,29 @@ function UsersConfig($provide, $stateProvider, $logProvider, UsersProvProvider){
 
 		
 	}//end of factory  https://auth.firebase.com/v2/awfitness/auth/facebook/callback
+})();
+;(function(){
+	'use strict';
+
+	angular.module('Loft.Fire', [
+		'firebase'
+		])
+	.factory('dbc', dbcFactory);
+
+	function dbcFactory(FIREBASE_URL, $firebaseAuth){
+		var obj = {};
+
+		var reference = new Firebase(FIREBASE_URL);
+
+		obj.getRef = function(){
+			return reference;
+		};
+
+		
+
+		return obj;
+
+	}//end of factory
 })();
 ;(function(){
 	'use strict';

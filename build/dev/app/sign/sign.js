@@ -76,7 +76,25 @@
 	        .then(function(e){
 	          clean();
 	          $state.go('home');
-	        });
+	        })
+	        .catch(function(error){
+          switch (error.code) {
+            case "INVALID_EMAIL":
+              $rootScope.addAlert('The specified user account email is invalid.');
+              console.log("The specified user account email is invalid.");
+              break;
+            case "INVALID_PASSWORD":
+              console.log("The specified user account password is incorrect.");
+              break;
+            case "INVALID_USER":
+              $rootScope.addAlert('The specified user account does not exist.');
+              console.log("The specified user account does not exist.");
+              break;
+            default:
+              $rootScope.addAlert('Error logging user in');
+              console.log("Error logging user in:", error);
+          }
+        });
 		};
 	}//end of SignInController
 

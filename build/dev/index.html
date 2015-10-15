@@ -9,6 +9,10 @@
 <body>
 	<div class="container" ng-controller="MainCtrl">
 		<ng-include	src="'app/status/navbar.html'"></ng-include>
+		<div class="alert" role="alert">
+	      <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
+	    </div>
+
 		<div class="container view-container" ui-view></div>
 		
 	</div>

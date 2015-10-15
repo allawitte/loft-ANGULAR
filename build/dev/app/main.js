@@ -24,7 +24,8 @@
 					'ui.bootstrap',
 					'Loft.Home',
 					'Loft.Navbar',
-					'Loft.Sign'
+					'Loft.Sign',
+					'Loft.Profile'
 					])
 					.config(Config)
 					.run(Run)
@@ -55,7 +56,7 @@ function Run(FIREBASE_URL, configOptions, $rootScope){
 		fullname : null
 	};
 	$rootScope.alerts = [ ];
-	$rootScope.addAlert = function(_type, _msg) {
+	$rootScope.addAlert = function(_msg, _type) {
 		_type = _type || 'warning';
     	$rootScope.alerts.push({type: _type, msg: _msg});
   };

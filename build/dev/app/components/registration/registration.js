@@ -45,6 +45,7 @@
 			    var user = $firebaseObject(usersRef.child(authData.uid));
 			    user.$loaded(function(_user){
 			    	$rootScope.currentUser.fullname = _user.fullname;
+			    	$rootScope.currentUser.id = _user.$id;
 			    })
 			    
 			    $rootScope.isUserLogged = true;
@@ -52,6 +53,7 @@
 			  } else {
 			  	$rootScope.isUserLogged = false;
 			  	$rootScope.currentUser.fullname = null;
+			  	$rootScope.currentUser.id = null;
 			    console.log("Not logged in");
 			    
 			  }
